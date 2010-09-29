@@ -1,0 +1,292 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A4126B612537E800003065F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B512537E800003065F /* UIKit.framework */; };
+		5A4126B812537E800003065F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B712537E800003065F /* Foundation.framework */; };
+		5A4126BA12537E800003065F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B912537E800003065F /* CoreGraphics.framework */; };
+		5A4126BC12537E800003065F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126BB12537E800003065F /* CoreData.framework */; };
+		5A4126C112537E800003065F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A4126BF12537E800003065F /* InfoPlist.strings */; };
+		5A4126C312537E800003065F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C212537E800003065F /* main.m */; };
+		5A4126C612537E800003065F /* HourglassAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C512537E800003065F /* HourglassAppDelegate.m */; };
+		5A4126C812537E800003065F /* Hourglass.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C712537E800003065F /* Hourglass.xcdatamodel */; };
+		5A4126CB12537E800003065F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A4126C912537E800003065F /* MainWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5A4126B212537E800003065F /* Hourglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hourglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A4126B512537E800003065F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5A4126B712537E800003065F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5A4126B912537E800003065F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5A4126BB12537E800003065F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5A4126BD12537E800003065F /* Hourglass-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hourglass-Info.plist"; sourceTree = "<group>"; };
+		5A4126BE12537E800003065F /* Hourglass_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hourglass_Prefix.pch; sourceTree = "<group>"; };
+		5A4126C012537E800003065F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5A4126C212537E800003065F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5A4126C412537E800003065F /* HourglassAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourglassAppDelegate.h; sourceTree = "<group>"; };
+		5A4126C512537E800003065F /* HourglassAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HourglassAppDelegate.m; sourceTree = "<group>"; };
+		5A4126C712537E800003065F /* Hourglass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hourglass.xcdatamodel; sourceTree = "<group>"; };
+		5A4126CA12537E800003065F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A4126AF12537E800003065F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A4126B612537E800003065F /* UIKit.framework in Frameworks */,
+				5A4126B812537E800003065F /* Foundation.framework in Frameworks */,
+				5A4126BA12537E800003065F /* CoreGraphics.framework in Frameworks */,
+				5A4126BC12537E800003065F /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A4126A212537E800003065F = {
+			isa = PBXGroup;
+			children = (
+				5A4126A912537E800003065F /* Models */,
+				5A4126AA12537E800003065F /* Classes */,
+				5A4126AB12537E800003065F /* Other Sources */,
+				5A4126AC12537E800003065F /* Resources */,
+				5A4126AD12537E800003065F /* Frameworks */,
+				5A4126B312537E800003065F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5A4126A912537E800003065F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126C712537E800003065F /* Hourglass.xcdatamodel */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5A4126AA12537E800003065F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126C412537E800003065F /* HourglassAppDelegate.h */,
+				5A4126C512537E800003065F /* HourglassAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		5A4126AB12537E800003065F /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126BE12537E800003065F /* Hourglass_Prefix.pch */,
+				5A4126C212537E800003065F /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		5A4126AC12537E800003065F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126BD12537E800003065F /* Hourglass-Info.plist */,
+				5A4126BF12537E800003065F /* InfoPlist.strings */,
+				5A4126C912537E800003065F /* MainWindow.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5A4126AD12537E800003065F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126B512537E800003065F /* UIKit.framework */,
+				5A4126B712537E800003065F /* Foundation.framework */,
+				5A4126B912537E800003065F /* CoreGraphics.framework */,
+				5A4126BB12537E800003065F /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A4126B312537E800003065F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A4126B212537E800003065F /* Hourglass.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A4126B112537E800003065F /* Hourglass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A4126CE12537E800003065F /* Build configuration list for PBXNativeTarget "Hourglass" */;
+			buildPhases = (
+				5A4126AE12537E800003065F /* Sources */,
+				5A4126AF12537E800003065F /* Frameworks */,
+				5A4126B012537E800003065F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hourglass;
+			productName = Hourglass;
+			productReference = 5A4126B212537E800003065F /* Hourglass.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A4126A412537E800003065F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "abstracture GmbH & Co. KG";
+			};
+			buildConfigurationList = 5A4126A712537E800003065F /* Build configuration list for PBXProject "Hourglass" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5A4126A212537E800003065F;
+			productRefGroup = 5A4126B312537E800003065F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A4126B112537E800003065F /* Hourglass */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5A4126B012537E800003065F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A4126C112537E800003065F /* InfoPlist.strings in Resources */,
+				5A4126CB12537E800003065F /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A4126AE12537E800003065F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A4126C312537E800003065F /* main.m in Sources */,
+				5A4126C612537E800003065F /* HourglassAppDelegate.m in Sources */,
+				5A4126C812537E800003065F /* Hourglass.xcdatamodel in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5A4126BF12537E800003065F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A4126C012537E800003065F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5A4126C912537E800003065F /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A4126CA12537E800003065F /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5A4126CC12537E800003065F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		5A4126CD12537E800003065F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+		5A4126CF12537E800003065F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Hourglass_Prefix.pch;
+				INFOPLIST_FILE = "Hourglass-Info.plist";
+				PRODUCT_NAME = Hourglass;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5A4126D012537E800003065F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Hourglass_Prefix.pch;
+				INFOPLIST_FILE = "Hourglass-Info.plist";
+				PRODUCT_NAME = Hourglass;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A4126A712537E800003065F /* Build configuration list for PBXProject "Hourglass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A4126CC12537E800003065F /* Debug */,
+				5A4126CD12537E800003065F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A4126CE12537E800003065F /* Build configuration list for PBXNativeTarget "Hourglass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A4126CF12537E800003065F /* Debug */,
+				5A4126D012537E800003065F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5A4126A412537E800003065F /* Project object */;
+}
