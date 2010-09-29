@@ -14,8 +14,8 @@
 		5A4126C112537E800003065F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A4126BF12537E800003065F /* InfoPlist.strings */; };
 		5A4126C312537E800003065F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C212537E800003065F /* main.m */; };
 		5A4126C612537E800003065F /* HourglassAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C512537E800003065F /* HourglassAppDelegate.m */; };
-		5A4126C812537E800003065F /* Hourglass.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126C712537E800003065F /* Hourglass.xcdatamodel */; };
 		5A4126CB12537E800003065F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A4126C912537E800003065F /* MainWindow.xib */; };
+		5A4126D812537F680003065F /* Hourglass.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126D712537F680003065F /* Hourglass.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 		5A4126C212537E800003065F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A4126C412537E800003065F /* HourglassAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourglassAppDelegate.h; sourceTree = "<group>"; };
 		5A4126C512537E800003065F /* HourglassAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HourglassAppDelegate.m; sourceTree = "<group>"; };
-		5A4126C712537E800003065F /* Hourglass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hourglass.xcdatamodel; sourceTree = "<group>"; };
 		5A4126CA12537E800003065F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		5A4126D712537F680003065F /* Hourglass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hourglass.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 		5A4126A912537E800003065F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5A4126C712537E800003065F /* Hourglass.xcdatamodel */,
+				5A4126D712537F680003065F /* Hourglass.xcdatamodel */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 			files = (
 				5A4126C312537E800003065F /* main.m in Sources */,
 				5A4126C612537E800003065F /* HourglassAppDelegate.m in Sources */,
-				5A4126C812537E800003065F /* Hourglass.xcdatamodel in Sources */,
+				5A4126D812537F680003065F /* Hourglass.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
