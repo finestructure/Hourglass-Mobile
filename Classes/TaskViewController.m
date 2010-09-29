@@ -36,6 +36,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.title = @"Tasks";
+  
   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
   NSEntityDescription *entity = [NSEntityDescription 
                                  entityForName:@"Task"

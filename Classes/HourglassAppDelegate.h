@@ -14,6 +14,7 @@
   // UI
   UIWindow *window;
   UITabBarController *tabBarController;
+  UINavigationController *navController;
   TaskViewController *taskViewController;
   
   // Core Data
@@ -24,6 +25,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabBarController;
+@property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, retain) TaskViewController *taskViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;

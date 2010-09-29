@@ -13,6 +13,7 @@
 
 @synthesize window;
 @synthesize tabBarController;
+@synthesize navController;
 @synthesize taskViewController;
 
 
@@ -22,9 +23,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
   self.taskViewController.managedObjectContext = [self managedObjectContext];
+  self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
+  self.tabBarController.viewControllers = [NSArray arrayWithObject:navController];
   
   [window addSubview:self.tabBarController.view];
   
