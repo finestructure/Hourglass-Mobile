@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaskViewController.h"
+
 
 @interface HourglassAppDelegate : NSObject <UIApplicationDelegate> {
   // UI
   UIWindow *window;
   UITabBarController *tabBarController;
+  TaskViewController *taskViewController;
   
   // Core Data
   NSManagedObjectContext *managedObjectContext;
@@ -21,6 +24,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabBarController;
+@property (nonatomic, retain) TaskViewController *taskViewController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

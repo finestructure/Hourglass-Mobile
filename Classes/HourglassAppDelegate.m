@@ -13,21 +13,25 @@
 
 @synthesize window;
 @synthesize tabBarController;
+@synthesize taskViewController;
 
 
 #pragma mark -
-#pragma mark Application Boilerplate
+#pragma mark Application Lifecycle
 #pragma mark -
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+  self.taskViewController = [[[TaskViewController alloc] init] autorelease];
+  self.taskViewController.managedObjectContext = [self managedObjectContext];
   
   [window addSubview:self.tabBarController.view];
   
   [window makeKeyAndVisible];
   return YES;
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   
@@ -45,6 +49,7 @@
     } 
   }
 }
+
 
 - (void)dealloc {
   

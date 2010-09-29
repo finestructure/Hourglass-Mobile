@@ -7,6 +7,7 @@
 //
 
 #import "TaskViewController.h"
+#import "Task.h"
 
 
 @implementation TaskViewController
@@ -107,16 +108,26 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+  static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+  }
     
-    // Configure the cell...
-    
-    return cell;
+  // A date formatter for the time stamp
+  static NSDateFormatter *dateFormatter = nil;
+  if (dateFormatter == nil) {
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+  }
+  
+  Task *task = (Task *)[self.tasks objectAtIndex:indexPath.row];
+  cell.textLabel.text = [dateFormatter stringFromDate:task.startDate];
+  cell.detailTextLabel.text = task.desc;
+  
+  return cell;
 }
 
 
