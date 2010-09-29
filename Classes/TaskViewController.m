@@ -59,7 +59,16 @@
   self.tasks = mutableFetchResults;
   [mutableFetchResults release];
 
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  
+  // Set up the buttons
+  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  
+  UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] 
+    initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)] autorelease];
+  self.navigationItem.rightBarButtonItem = addButton;
+
+  self.navigationItem.leftBarButtonItem.enabled = NO;
+  self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 
@@ -90,6 +99,31 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+
+#pragma mark -
+#pragma mark Workers
+#pragma mark -
+
+
+-(void)addTask {
+  id task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+  
+  NSError *error;
+  if (![self.managedObjectContext save:&error]) {
+    // Handle the error.
+    NSLog(@"Error while saving task: %@", [error userInfo]);
+  }
+  
+  //  [tasksArray addObject:task];
+  //  [self.tableView reloadData];
+  [self.tasks insertObject:task atIndex:0];
+  NSIndexPath *ip = [NSIndexPath indexPathForRow:0 inSection:0];
+  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:ip]
+                        withRowAnimation:UITableViewRowAnimationFade];
+  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] 
+                        atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
 
 
 #pragma mark -
@@ -199,13 +233,15 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+  // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+  self.tasks = nil;
 }
 
 
 - (void)dealloc {
-    [super dealloc];
+  [self.managedObjectContext release];
+  [self.tasks release];
+  [super dealloc];
 }
 
 
