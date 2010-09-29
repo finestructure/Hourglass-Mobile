@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A149AC912538B08004BD80E /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A149AC812538B08004BD80E /* Task.m */; };
 		5A4126B612537E800003065F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B512537E800003065F /* UIKit.framework */; };
 		5A4126B812537E800003065F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B712537E800003065F /* Foundation.framework */; };
 		5A4126BA12537E800003065F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4126B912537E800003065F /* CoreGraphics.framework */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A149AC712538B08004BD80E /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		5A149AC812538B08004BD80E /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		5A4126B212537E800003065F /* Hourglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hourglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4126B512537E800003065F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A4126B712537E800003065F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A149ACB12538B16004BD80E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A4C426B1253865B000E3FB2 /* TaskViewController.h */,
+				5A4C426C1253865B000E3FB2 /* TaskViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		5A4126A212537E800003065F = {
 			isa = PBXGroup;
 			children = (
@@ -77,8 +89,9 @@
 			children = (
 				5A4126C412537E800003065F /* HourglassAppDelegate.h */,
 				5A4126C512537E800003065F /* HourglassAppDelegate.m */,
-				5A4C426B1253865B000E3FB2 /* TaskViewController.h */,
-				5A4C426C1253865B000E3FB2 /* TaskViewController.m */,
+				5A149ACB12538B16004BD80E /* Controllers */,
+				5A149AC712538B08004BD80E /* Task.h */,
+				5A149AC812538B08004BD80E /* Task.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -187,6 +200,7 @@
 				5A4126C612537E800003065F /* HourglassAppDelegate.m in Sources */,
 				5A4126D812537F680003065F /* Hourglass.xcdatamodel in Sources */,
 				5A4C426D1253865B000E3FB2 /* TaskViewController.m in Sources */,
+				5A149AC912538B08004BD80E /* Task.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
