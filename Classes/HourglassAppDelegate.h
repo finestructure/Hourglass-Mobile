@@ -9,13 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @interface HourglassAppDelegate : NSObject <UIApplicationDelegate> {
+  // UI
   UIWindow *window;
+  UITabBarController *tabBarController;
+  
+  // Core Data
   NSManagedObjectContext *managedObjectContext;
   NSManagedObjectModel *managedObjectModel;
   NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) UITabBarController *tabBarController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

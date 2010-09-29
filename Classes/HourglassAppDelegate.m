@@ -12,6 +12,7 @@
 
 
 @synthesize window;
+@synthesize tabBarController;
 
 
 #pragma mark -
@@ -20,6 +21,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+  
+  [window addSubview:self.tabBarController.view];
+  
   [window makeKeyAndVisible];
   return YES;
 }
