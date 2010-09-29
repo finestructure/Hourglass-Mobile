@@ -18,6 +18,8 @@
 
 #pragma mark -
 #pragma mark Initialization
+#pragma mark -
+
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -31,6 +33,7 @@
 
 #pragma mark -
 #pragma mark View lifecycle
+#pragma mark -
 
 
 - (void)viewDidLoad {
@@ -66,9 +69,6 @@
   UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] 
     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)] autorelease];
   self.navigationItem.rightBarButtonItem = addButton;
-
-  self.navigationItem.leftBarButtonItem.enabled = NO;
-  self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 
@@ -176,19 +176,28 @@
 */
 
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    // Delete the managed object at the given index path.
+    NSManagedObject *toDelete = [self.tasks objectAtIndex:indexPath.row];
+    [managedObjectContext deleteObject:toDelete];
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    // Update the array and table view.
+    [self.tasks removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                        withRowAnimation:YES];
+    
+    // Commit the change.
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+      // Handle the error.
+      NSLog(@"Error while deleting task: %@", [error userInfo]);
+    }
+  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+  }   
 }
-*/
 
 
 /*
