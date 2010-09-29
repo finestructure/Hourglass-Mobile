@@ -12,6 +12,9 @@
 @implementation TaskViewController
 
 
+@synthesize managedObjectContext;
+@synthesize tasks;
+
 #pragma mark -
 #pragma mark Initialization
 
@@ -28,17 +31,34 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
-- (void)viewDidLoad {
-    [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
+  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+  NSEntityDescription *entity = [NSEntityDescription 
+                                 entityForName:@"Task"
+                                 inManagedObjectContext:self.managedObjectContext];
+  [request setEntity:entity];
+  
+  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                   ascending:NO];
+  NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+  [request setSortDescriptors:sortDescriptors];
+  
+  NSError *error;
+  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+  if (mutableFetchResults == nil) {
+    // Handle the error.
+    NSLog(@"Error while fetching tasks: %@", [error userInfo]);
+  }
+  
+  self.tasks = mutableFetchResults;
+  [mutableFetchResults release];
+
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
+
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,13 +94,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return <#number of sections#>;
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return <#number of rows in section#>;
+  // Return the number of rows in the section.
+  return [self.tasks count];
 }
 
 
