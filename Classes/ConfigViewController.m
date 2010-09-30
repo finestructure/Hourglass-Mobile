@@ -38,6 +38,7 @@
 
 
 -(IBAction)loadFilePressed:(id)sender {
+  [[self restClient] loadMetadata:@"/"];
 }
 
 
@@ -107,6 +108,27 @@
 
 - (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
   self.userIdLabel.text = [NSString stringWithFormat:@"Linked to %@", [info displayName]];
+}
+
+
+- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata {
+  for (DBMetadata* child in metadata.contents) {
+    NSLog(child.path);
+//    NSString* extension = [[child.path pathExtension] lowercaseString];
+//    if (!child.isDirectory && [validExtensions indexOfObject:extension] != NSNotFound) {
+//      [newPhotoPaths addObject:child.path];
+//    }
+  }
+}
+
+
+- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path {
+  NSLog(@"Metadata unchanged!");
+}
+
+
+- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
+  NSLog(@"Error loading metadata: %@", error);
 }
 
 
