@@ -1,2 +1,5 @@
 Hourglass.xcodeproj/project.xcworkspace/xcuserdata/*
 Hourglass.xcodeproj/xcuserdata/*
+Hourglass.xcodeproj/*.mode1v3
+Hourglass.xcodeproj/*.pbxuser
+build/*
