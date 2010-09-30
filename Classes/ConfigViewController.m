@@ -38,7 +38,10 @@
 
 
 -(IBAction)loadFilePressed:(id)sender {
-  [[self restClient] loadMetadata:@"/"];
+  //[[self restClient] loadMetadata:@"/"];
+  NSString *fileName = @"Test.hglass";
+  NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+  [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
 }
 
 
@@ -129,6 +132,16 @@
 
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
   NSLog(@"Error loading metadata: %@", error);
+}
+
+
+- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
+  NSLog(@"Loaded file: %@", destPath);
+}
+
+
+- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
+  NSLog(@"Error loading file: %@", [error userInfo]);
 }
 
 
