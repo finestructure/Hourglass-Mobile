@@ -13,6 +13,7 @@
 
 @synthesize linkButton;
 @synthesize userIdLabel;
+@synthesize loadFileButton;
 
 #pragma mark -
 #pragma mark Workers
@@ -36,9 +37,18 @@
 }
 
 
+-(IBAction)loadFilePressed:(id)sender {
+}
+
+
 - (void)linkStatusUIUpdate {
-  NSString* title = [[DBSession sharedSession] isLinked] ? @"Unlink Dropbox" : @"Link Dropbox";
-  [linkButton setTitle:title forState:UIControlStateNormal];
+  if ([[DBSession sharedSession] isLinked]) {
+    [linkButton setTitle:@"Unlink Dropbox" forState:UIControlStateNormal];
+    self.loadFileButton.enabled = YES;
+  } else {
+    [linkButton setTitle:@"Link Dropbox" forState:UIControlStateNormal];
+    self.loadFileButton.enabled = NO;
+  }
 }  
 
 
