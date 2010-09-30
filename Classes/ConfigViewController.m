@@ -12,6 +12,7 @@
 @implementation ConfigViewController
 
 @synthesize linkButton;
+@synthesize userIdLabel;
 
 #pragma mark -
 #pragma mark Workers
@@ -30,12 +31,12 @@
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
       autorelease]
      show];
-    [self updateButtons];
+    [self linkStatusUIUpdate];
   }
 }
 
 
-- (void)updateButtons {
+- (void)linkStatusUIUpdate {
   NSString* title = [[DBSession sharedSession] isLinked] ? @"Unlink Dropbox" : @"Link Dropbox";
   [linkButton setTitle:title forState:UIControlStateNormal];
 }  
@@ -60,11 +61,13 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.userIdLabel.text = @"";
+  
   if ([[DBSession sharedSession] isLinked]) {
     [[self restClient] loadAccountInfo];
   }
   
-  [self updateButtons];
+  [self linkStatusUIUpdate];
 }
 
 
@@ -93,8 +96,7 @@
 
 
 - (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
-  NSLog(@"User id: %@", [info userId]);
-  NSLog(@"Display name: %@", [info displayName]);
+  self.userIdLabel.text = [NSString stringWithFormat:@"Linked to %@", [info displayName]];
 }
 
 
@@ -104,7 +106,7 @@
 
 
 - (void)loginControllerDidLogin:(DBLoginController*)controller {
-  [self updateButtons];
+  [self linkStatusUIUpdate];
 }
 
 - (void)loginControllerDidCancel:(DBLoginController*)controller {  

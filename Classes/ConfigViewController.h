@@ -12,14 +12,16 @@
 
 @interface ConfigViewController : UIViewController<DBLoginControllerDelegate, DBRestClientDelegate> {
   UIButton *linkButton;
+  UILabel *userIdLabel;
   DBRestClient* restClient;
 }
 
 -(IBAction)linkButtonPressed:(id)sender;
--(void)updateButtons;
+-(void)linkStatusUIUpdate;
 - (DBRestClient*)restClient;
 
 
 @property (nonatomic, retain) IBOutlet UIButton* linkButton;
+@property (nonatomic, retain) IBOutlet UILabel* userIdLabel;
 
 @end
