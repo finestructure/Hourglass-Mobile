@@ -66,7 +66,7 @@
 	
 	if ([[self HTTPMethod] isEqualToString:@"GET"] && [self.parameters count]) {
 		NSString *urlString = [NSString stringWithFormat:@"%@?%@", [self.url absoluteString], parameterString];
-		MPLog( @"urlString - %@", urlString);
+		//MPLog( @"urlString - %@", urlString);
 		
 		[aRequest setURL:[NSURL URLWithString:urlString]];
 	} else if ([[self HTTPMethod] isEqualToString:@"POST"]) {
