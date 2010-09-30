@@ -7,6 +7,7 @@
 //
 
 #import "HourglassAppDelegate.h"
+#import "ConfigViewController.h"
 
 
 @implementation HourglassAppDelegate
@@ -30,13 +31,14 @@
   session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
   [DBSession setSharedSession:session];
   
-  
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
-  self.tabBarController.viewControllers = [NSArray arrayWithObject:navController];
+  ConfigViewController *cvc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
+                                                                      bundle:nil] autorelease];
+  self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, cvc, nil];
   
   [window addSubview:self.tabBarController.view];
   
