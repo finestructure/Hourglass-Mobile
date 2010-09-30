@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DropboxSDK.h"
 
 
-@interface ConfigViewController : UIViewController {
-
+@interface ConfigViewController : UIViewController<DBLoginControllerDelegate, DBRestClientDelegate> {
+  UIButton *linkButton;
+  DBRestClient* restClient;
 }
+
+-(IBAction)linkButtonPressed:(id)sender;
+-(void)updateButtons;
+- (DBRestClient*)restClient;
+
+
+@property (nonatomic, retain) IBOutlet UIButton* linkButton;
 
 @end

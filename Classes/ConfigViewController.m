@@ -11,30 +11,62 @@
 
 @implementation ConfigViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+@synthesize linkButton;
 
-/*
+#pragma mark -
+#pragma mark Workers
+#pragma mark -
+
+
+-(IBAction)linkButtonPressed:(id)sender {
+  if (![[DBSession sharedSession] isLinked]) {
+    DBLoginController* controller = [[DBLoginController new] autorelease];
+    controller.delegate = self;
+    [controller presentFromController:self];
+  } else {
+    [[DBSession sharedSession] unlink];
+    [[[[UIAlertView alloc] 
+       initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked" 
+       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+      autorelease]
+     show];
+    [self updateButtons];
+  }
+}
+
+
+- (void)updateButtons {
+  NSString* title = [[DBSession sharedSession] isLinked] ? @"Unlink Dropbox" : @"Link Dropbox";
+  [linkButton setTitle:title forState:UIControlStateNormal];
+}  
+
+
+- (DBRestClient*)restClient {
+  if (!restClient) {
+    restClient = 
+    [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    restClient.delegate = self;
+  }
+  return restClient;
+}
+
+
+#pragma mark -
+#pragma mark Lifecycle
+#pragma mark -
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
+  
+  if ([[DBSession sharedSession] isLinked]) {
+    [[self restClient] loadAccountInfo];
+  }
+  
+  [self updateButtons];
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -54,5 +86,28 @@
     [super dealloc];
 }
 
+
+#pragma mark -
+#pragma mark DBLoginControllerDelegate methods
+#pragma mark -
+
+
+- (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
+  NSLog(@"User id:", [info userId]);
+  NSLog(@"Display name:", [info displayName]);
+}
+
+
+#pragma mark -
+#pragma mark DBLoginControllerDelegate methods
+#pragma mark -
+
+
+- (void)loginControllerDidLogin:(DBLoginController*)controller {
+  [self updateButtons];
+}
+
+- (void)loginControllerDidCancel:(DBLoginController*)controller {  
+}
 
 @end
