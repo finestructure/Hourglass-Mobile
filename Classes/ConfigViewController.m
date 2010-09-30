@@ -93,8 +93,8 @@
 
 
 - (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
-  NSLog(@"User id:", [info userId]);
-  NSLog(@"Display name:", [info displayName]);
+  NSLog(@"User id: %@", [info userId]);
+  NSLog(@"Display name: %@", [info displayName]);
 }
 
 
