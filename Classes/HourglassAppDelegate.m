@@ -8,6 +8,7 @@
 
 #import "HourglassAppDelegate.h"
 
+
 @implementation HourglassAppDelegate
 
 
@@ -23,6 +24,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  DBSession* session = [[[DBSession alloc] initWithConsumerKey:@"5ok44aa1gyt0fz6" 
+                                                consumerSecret:@"o56xnltj8jglls3"] 
+                        autorelease];
+  session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
+  [DBSession setSharedSession:session];
+  
+  
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
@@ -147,5 +155,17 @@
 - (NSString *)applicationDocumentsDirectory {
   return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
+
+
+#pragma mark -
+#pragma mark DBSessionDelegate methods
+#pragma mark -
+
+
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session {
+  DBLoginController* loginController = [[DBLoginController new] autorelease];
+  [loginController presentFromController:self.tabBarController];
+}
+
 
 @end

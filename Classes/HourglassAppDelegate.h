@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "TaskViewController.h"
+#import "DropboxSDK.h"
 
 
-@interface HourglassAppDelegate : NSObject <UIApplicationDelegate> {
+@interface HourglassAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate> {
   // UI
   UIWindow *window;
   UITabBarController *tabBarController;
