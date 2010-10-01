@@ -37,7 +37,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSString *)applicationDocumentsDirectory;
-- (void)loadFile:(NSString *)fileName;
+- (NSString *)loadFile:(NSString *)fileName;
 - (DBRestClient *)restClient;
 
 @end

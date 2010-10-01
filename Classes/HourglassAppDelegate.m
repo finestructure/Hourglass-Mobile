@@ -24,10 +24,11 @@
 #pragma mark -
 
 
--(void)loadFile:(NSString *)fileName {
+-(NSString *)loadFile:(NSString *)fileName {
   NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
   NSLog(@"Loading file into: %@", path);
   [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+  return path;
 }
 
 
