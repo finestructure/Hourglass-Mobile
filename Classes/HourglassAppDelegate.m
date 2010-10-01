@@ -78,7 +78,6 @@
       // go to link account
     }
   }
-
   
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
@@ -86,6 +85,8 @@
   self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
   ConfigViewController *cvc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
                                                                       bundle:nil] autorelease];
+  cvc.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
+  cvc.title = NSLocalizedString(@"Settings", @"Settings tab bar item title");
   self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, cvc, nil];
   
   [window addSubview:self.tabBarController.view];
