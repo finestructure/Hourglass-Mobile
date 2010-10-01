@@ -20,6 +20,28 @@
 
 
 #pragma mark -
+#pragma mark Workers
+#pragma mark -
+
+
+-(void)loadFile:(NSString *)fileName {
+  NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+  NSLog(@"Loading file into: %@", path);
+  [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+}
+
+
+- (DBRestClient*)restClient {
+  if (!restClient) {
+    restClient = 
+    [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    restClient.delegate = self;
+  }
+  return restClient;
+}
+
+
+#pragma mark -
 #pragma mark Application Lifecycle
 #pragma mark -
 
@@ -30,6 +52,20 @@
                         autorelease];
   session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
   [DBSession setSharedSession:session];
+  
+  // load DB file
+  NSString *fileName = [@"/" stringByAppendingPathComponent:@"Test.hglass"]; 
+  //[[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  if (fileName != nil) {
+    [self loadFile:fileName];
+  } else {
+    if ([[DBSession sharedSession] isLinked]) {
+      // show file list on DB
+    } else {
+      // go to link account
+    }
+  }
+
   
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
@@ -160,8 +196,23 @@
 
 
 #pragma mark -
-#pragma mark DBSessionDelegate methods
+#pragma mark DB delegate methods
 #pragma mark -
+
+
+- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
+  NSLog(@"Loaded file: %@", destPath);
+}
+
+
+- (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
+  NSLog(@"Load progress: %.2f", progress);
+}
+
+
+- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
+  NSLog(@"Error loading file: %@", [error userInfo]);
+}
 
 
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session {

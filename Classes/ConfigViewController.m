@@ -13,7 +13,7 @@
 
 @synthesize linkButton;
 @synthesize userIdLabel;
-@synthesize loadFileButton;
+@synthesize chooseFileButton;
 
 #pragma mark -
 #pragma mark Workers
@@ -37,21 +37,18 @@
 }
 
 
--(IBAction)loadFilePressed:(id)sender {
-  //[[self restClient] loadMetadata:@"/"];
-  NSString *fileName = @"Test.hglass";
-  NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
-  [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+-(IBAction)chooseFilePressed:(id)sender {
+  NSLog(@"Choose file");
 }
 
 
 - (void)linkStatusUIUpdate {
   if ([[DBSession sharedSession] isLinked]) {
     [linkButton setTitle:@"Unlink Dropbox" forState:UIControlStateNormal];
-    self.loadFileButton.enabled = YES;
+    self.chooseFileButton.enabled = YES;
   } else {
     [linkButton setTitle:@"Link Dropbox" forState:UIControlStateNormal];
-    self.loadFileButton.enabled = NO;
+    self.chooseFileButton.enabled = NO;
   }
 }  
 
@@ -105,7 +102,7 @@
 
 
 #pragma mark -
-#pragma mark DBLoginControllerDelegate methods
+#pragma mark DB delegate methods
 #pragma mark -
 
 
@@ -133,21 +130,6 @@
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
   NSLog(@"Error loading metadata: %@", error);
 }
-
-
-- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
-  NSLog(@"Loaded file: %@", destPath);
-}
-
-
-- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
-  NSLog(@"Error loading file: %@", [error userInfo]);
-}
-
-
-#pragma mark -
-#pragma mark DBLoginControllerDelegate methods
-#pragma mark -
 
 
 - (void)loginControllerDidLogin:(DBLoginController*)controller {

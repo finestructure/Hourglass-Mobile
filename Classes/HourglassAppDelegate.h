@@ -11,7 +11,7 @@
 #import "DropboxSDK.h"
 
 
-@interface HourglassAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate> {
+@interface HourglassAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate, DBRestClientDelegate> {
   // UI
   UIWindow *window;
   UITabBarController *tabBarController;
@@ -22,6 +22,9 @@
   NSManagedObjectContext *managedObjectContext;
   NSManagedObjectModel *managedObjectModel;
   NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+  // Dropbox
+  DBRestClient* restClient;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -34,5 +37,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSString *)applicationDocumentsDirectory;
+- (void)loadFile:(NSString *)fileName;
+- (DBRestClient *)restClient;
 
 @end
