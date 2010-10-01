@@ -82,6 +82,8 @@
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
+  self.taskViewController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
+  self.taskViewController.title = NSLocalizedString(@"Tasks", @"Task tab bar item title");
   self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
   ConfigViewController *cvc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
                                                                       bundle:nil] autorelease];
