@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *tasks;
 
+-(void)fetchEntities;
+
 @end

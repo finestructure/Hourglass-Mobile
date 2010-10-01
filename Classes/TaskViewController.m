@@ -16,6 +16,36 @@
 @synthesize managedObjectContext;
 @synthesize tasks;
 
+
+#pragma mark -
+#pragma mark Workers
+#pragma mark -
+
+
+-(void)fetchEntities {
+  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+  NSEntityDescription *entity = [NSEntityDescription 
+                                 entityForName:@"Task"
+                                 inManagedObjectContext:self.managedObjectContext];
+  [request setEntity:entity];
+
+  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                   ascending:NO];
+  NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+  [request setSortDescriptors:sortDescriptors];
+
+  NSError *error;
+  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+  if (mutableFetchResults == nil) {
+    // Handle the error.
+    NSLog(@"Error while fetching tasks: %@", [error userInfo]);
+  }
+
+  self.tasks = mutableFetchResults;
+  [mutableFetchResults release];
+}
+
+
 #pragma mark -
 #pragma mark Initialization
 #pragma mark -
@@ -40,29 +70,7 @@
   [super viewDidLoad];
 
   self.title = @"Tasks";
-  
-  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-  NSEntityDescription *entity = [NSEntityDescription 
-                                 entityForName:@"Task"
-                                 inManagedObjectContext:self.managedObjectContext];
-  [request setEntity:entity];
-  
-  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
-                                                                   ascending:NO];
-  NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-  [request setSortDescriptors:sortDescriptors];
-  
-  NSError *error;
-  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-  if (mutableFetchResults == nil) {
-    // Handle the error.
-    NSLog(@"Error while fetching tasks: %@", [error userInfo]);
-  }
-  
-  self.tasks = mutableFetchResults;
-  [mutableFetchResults release];
-
-  
+    
   // Set up the buttons
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
