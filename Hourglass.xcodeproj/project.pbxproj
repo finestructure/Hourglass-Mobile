@@ -65,6 +65,8 @@
 		5AE1FD941254B5A100B5C973 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE1FD931254B5A100B5C973 /* Security.framework */; };
 		5AE1FDD01254B9C000B5C973 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FDCE1254B9C000B5C973 /* ConfigViewController.m */; };
 		5AE1FDD11254B9C000B5C973 /* ConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1FDCF1254B9C000B5C973 /* ConfigView.xib */; };
+		5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FF911255E91800B5C973 /* ProgressViewController.m */; };
+		5AE1FF941255E91800B5C973 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1FF921255E91800B5C973 /* ProgressView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +173,9 @@
 		5AE1FDCD1254B9C000B5C973 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		5AE1FDCE1254B9C000B5C973 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		5AE1FDCF1254B9C000B5C973 /* ConfigView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ConfigView.xib; path = Classes/ConfigView.xib; sourceTree = "<group>"; };
+		5AE1FF901255E91800B5C973 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
+		5AE1FF911255E91800B5C973 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
+		5AE1FF921255E91800B5C973 /* ProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressView.xib; path = Classes/ProgressView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +201,8 @@
 				5A4C426C1253865B000E3FB2 /* TaskViewController.m */,
 				5AE1FDCD1254B9C000B5C973 /* ConfigViewController.h */,
 				5AE1FDCE1254B9C000B5C973 /* ConfigViewController.m */,
+				5AE1FF901255E91800B5C973 /* ProgressViewController.h */,
+				5AE1FF911255E91800B5C973 /* ProgressViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -249,6 +256,7 @@
 				5A4126BF12537E800003065F /* InfoPlist.strings */,
 				5A4126C912537E800003065F /* MainWindow.xib */,
 				5AE1FDCF1254B9C000B5C973 /* ConfigView.xib */,
+				5AE1FF921255E91800B5C973 /* ProgressView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -458,6 +466,7 @@
 				5AE1FD8D1254B58800B5C973 /* db_logo.png in Resources */,
 				5AE1FD8E1254B58800B5C973 /* db_logo@2x.png in Resources */,
 				5AE1FDD11254B9C000B5C973 /* ConfigView.xib in Resources */,
+				5AE1FF941255E91800B5C973 /* ProgressView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +516,7 @@
 				5AE1FD821254B58800B5C973 /* NSURLResponse+Encoding.m in Sources */,
 				5AE1FD831254B58800B5C973 /* NSString+Dropbox.m in Sources */,
 				5AE1FDD01254B9C000B5C973 /* ConfigViewController.m in Sources */,
+				5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
