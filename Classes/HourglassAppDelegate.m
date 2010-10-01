@@ -17,6 +17,7 @@
 @synthesize tabBarController;
 @synthesize navController;
 @synthesize taskViewController;
+@synthesize storePath;
 
 
 #pragma mark -
@@ -55,7 +56,7 @@
   [DBSession setSharedSession:session];
   
   // load DB file
-  NSString *fileName = [@"/" stringByAppendingPathComponent:@"Test.hglass"]; 
+  NSString *fileName = [@"/" stringByAppendingPathComponent:@"Test.sqlite"]; 
   //[[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   if (fileName != nil) {
     [self loadFile:fileName];
@@ -71,7 +72,6 @@
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
-  self.taskViewController.managedObjectContext = [self managedObjectContext];
   self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
   ConfigViewController *cvc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
                                                                       bundle:nil] autorelease];
@@ -122,7 +122,6 @@
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
 - (NSManagedObjectContext *)managedObjectContext {
-  
   if (managedObjectContext) {
     return managedObjectContext;
   }
@@ -141,7 +140,6 @@
  If the model doesn't already exist, it is created by merging all of the models found in the application bundle.
  */
 - (NSManagedObjectModel *)managedObjectModel {
-  
   if (managedObjectModel) {
     return managedObjectModel;
   }
@@ -155,12 +153,12 @@
  If the coordinator doesn't already exist, it is created and the application's store added to it.
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-  
   if (persistentStoreCoordinator) {
     return persistentStoreCoordinator;
   }
   
-  NSURL *storeUrl = [NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Hourglass.sqlite"]];
+  //NSString *path = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Hourglass.sqlite"];
+  NSURL *storeUrl = [NSURL fileURLWithPath:self.storePath];
   
   NSError *error = nil;
   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -202,12 +200,15 @@
 
 
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
-  NSLog(@"Loaded file: %@", destPath);
+  //NSLog(@"Loaded file: %@", destPath);
+  self.storePath = destPath;
+  self.taskViewController.managedObjectContext = [self managedObjectContext];
+  [self.taskViewController fetchEntities];
 }
 
 
 - (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
-  NSLog(@"Load progress: %.2f", progress);
+  //NSLog(@"Load progress: %.2f", progress);
 }
 
 

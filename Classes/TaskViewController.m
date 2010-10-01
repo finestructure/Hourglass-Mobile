@@ -23,6 +23,7 @@
 
 
 -(void)fetchEntities {
+  NSLog(@"Fetching entities");
   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
   NSEntityDescription *entity = [NSEntityDescription 
                                  entityForName:@"Task"
@@ -43,6 +44,7 @@
 
   self.tasks = mutableFetchResults;
   [mutableFetchResults release];
+  [self.tableView reloadData];
 }
 
 
