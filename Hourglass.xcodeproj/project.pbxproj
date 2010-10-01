@@ -18,6 +18,7 @@
 		5A4126CB12537E800003065F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A4126C912537E800003065F /* MainWindow.xib */; };
 		5A4126D812537F680003065F /* Hourglass.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126D712537F680003065F /* Hourglass.xcdatamodel */; };
 		5A4C426D1253865B000E3FB2 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C426C1253865B000E3FB2 /* TaskViewController.m */; };
+		5AE100C41256129000B5C973 /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100C31256129000B5C973 /* Hourglass.png */; };
 		5AE1FD631254B58800B5C973 /* DBAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */; };
 		5AE1FD641254B58800B5C973 /* DBCreateAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD101254B58700B5C973 /* DBCreateAccountController.m */; };
 		5AE1FD651254B58800B5C973 /* DBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD121254B58700B5C973 /* DBError.m */; };
@@ -87,6 +88,7 @@
 		5A4126D712537F680003065F /* Hourglass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hourglass.xcdatamodel; sourceTree = "<group>"; };
 		5A4C426B1253865B000E3FB2 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
 		5A4C426C1253865B000E3FB2 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		5AE100C31256129000B5C973 /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
 		5AE1FD0D1254B58700B5C973 /* DBAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAccountInfo.h; sourceTree = "<group>"; };
 		5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAccountInfo.m; sourceTree = "<group>"; };
 		5AE1FD0F1254B58700B5C973 /* DBCreateAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCreateAccountController.h; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 		5A4126AC12537E800003065F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5AE100C31256129000B5C973 /* Hourglass.png */,
 				5A4126BD12537E800003065F /* Hourglass-Info.plist */,
 				5A4126BF12537E800003065F /* InfoPlist.strings */,
 				5A4126C912537E800003065F /* MainWindow.xib */,
@@ -467,6 +470,7 @@
 				5AE1FD8E1254B58800B5C973 /* db_logo@2x.png in Resources */,
 				5AE1FDD11254B9C000B5C973 /* ConfigView.xib in Resources */,
 				5AE1FF941255E91800B5C973 /* ProgressView.xib in Resources */,
+				5AE100C41256129000B5C973 /* Hourglass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
