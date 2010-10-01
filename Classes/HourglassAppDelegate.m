@@ -33,6 +33,17 @@
 }
 
 
+-(void)saveFile {
+  NSLog(@"Saving file %@...", self.storePath);
+  bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+  }];
+  
+  [[self restClient] uploadFile:@"Test2.sqlite" toPath:@"/" fromPath:self.storePath];
+}
+
+
 - (DBRestClient*)restClient {
   if (!restClient) {
     restClient = 
@@ -81,6 +92,13 @@
   
   [window makeKeyAndVisible];
   return YES;
+}
+
+
+-(void)applicationDidEnterBackground:(UIApplication *)application {
+  NSLog(@"applicationDidEnterBackground");
+
+  [self saveFile];
 }
 
 
@@ -199,6 +217,8 @@
 #pragma mark -
 
 
+// load
+
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
   //NSLog(@"Loaded file: %@", destPath);
   self.storePath = destPath;
@@ -216,6 +236,30 @@
   NSLog(@"Error loading file: %@", [error userInfo]);
 }
 
+
+// save
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath {
+  NSLog(@"Uploaded file: %@", destPath);
+  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+  bgTask = UIBackgroundTaskInvalid;
+}
+
+
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
+           forFile:(NSString*)destPath from:(NSString*)srcPath {
+  NSLog(@"Upload progress: %.2f", progress);
+}
+
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error {
+  NSLog(@"Error saving file: %@", [error userInfo]);  
+  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+  bgTask = UIBackgroundTaskInvalid;
+}
+
+
+// session
 
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session {
   DBLoginController* loginController = [[DBLoginController new] autorelease];

@@ -26,6 +26,8 @@
   // Dropbox
   DBRestClient *restClient;
   NSString *storePath;
+  
+  UIBackgroundTaskIdentifier bgTask;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
