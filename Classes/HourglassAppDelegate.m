@@ -7,7 +7,6 @@
 //
 
 #import "HourglassAppDelegate.h"
-#import "ConfigViewController.h"
 #import "SettingsTableViewController.h"
 
 
@@ -91,10 +90,6 @@
   self.taskViewController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
   self.taskViewController.title = NSLocalizedString(@"Tasks", @"Task tab bar item title");
   self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
-  ConfigViewController *cvc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
-                                                                      bundle:nil] autorelease];
-  cvc.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
-  cvc.title = NSLocalizedString(@"Settings", @"Settings tab bar item title");
   
   SettingsTableViewController *tv = [[[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
   UINavigationController *settingsController = [[[UINavigationController alloc] initWithRootViewController:tv] autorelease];
