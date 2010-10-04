@@ -10,8 +10,6 @@
 
 
 @interface TaskViewController : UITableViewController {
-  NSManagedObjectContext *managedObjectContext;
-  NSMutableArray *tasks;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;

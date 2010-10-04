@@ -14,6 +14,7 @@
 @synthesize linkButton;
 @synthesize userIdLabel;
 @synthesize chooseFileButton;
+@synthesize restClient;
 
 #pragma mark -
 #pragma mark Workers

@@ -12,34 +12,18 @@
 
 
 @interface HourglassAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate, DBRestClientDelegate> {
-  // UI
-  UIWindow *window;
-  UITabBarController *tabBarController;
-  UINavigationController *navController;
-  TaskViewController *taskViewController;
-  
-  // Core Data
-  NSManagedObjectContext *managedObjectContext;
-  NSManagedObjectModel *managedObjectModel;
-  NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-  // Dropbox
-  DBRestClient *restClient;
-  NSString *storePath;
-  
-  UIBackgroundTaskIdentifier bgTask;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, retain) TaskViewController *taskViewController;
-
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSString *storePath;
+@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 
 - (NSString *)applicationDocumentsDirectory;
 - (NSString *)loadFile:(NSString *)fileName;

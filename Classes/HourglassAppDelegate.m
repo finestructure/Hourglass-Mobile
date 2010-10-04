@@ -17,7 +17,12 @@
 @synthesize tabBarController;
 @synthesize navController;
 @synthesize taskViewController;
+@synthesize managedObjectContext;
+@synthesize managedObjectModel;
+@synthesize persistentStoreCoordinator;
+@synthesize restClient;
 @synthesize storePath;
+@synthesize bgTask;
 
 
 #pragma mark -
@@ -124,11 +129,16 @@
 
 
 - (void)dealloc {
+  self.taskViewController = nil;
+  self.managedObjectContext = nil;
+  self.managedObjectModel = nil;
+  self.persistentStoreCoordinator = nil;
+  self.restClient = nil;
+  self.storePath = nil;
+  self.window = nil;
+  self.tabBarController = nil;
+  self.navController = nil;
   
-  [window release];
-  [managedObjectContext release];
-  [managedObjectModel release];
-  [persistentStoreCoordinator release];
   [super dealloc];
 }
 
