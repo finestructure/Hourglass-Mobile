@@ -6,10 +6,10 @@
 //  Copyright 2010 abstracture GmbH & Co. KG. All rights reserved.
 //
 
-#import "ConfigViewController.h"
+#import "AccountViewController.h"
 
 
-@implementation ConfigViewController
+@implementation AccountViewController
 
 @synthesize linkButton;
 @synthesize userIdLabel;

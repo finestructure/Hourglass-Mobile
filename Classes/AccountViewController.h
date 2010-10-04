@@ -10,7 +10,7 @@
 #import "DropboxSDK.h"
 
 
-@interface ConfigViewController : UIViewController<DBLoginControllerDelegate, DBRestClientDelegate> {
+@interface AccountViewController : UIViewController<DBLoginControllerDelegate, DBRestClientDelegate> {
 }
 
 -(IBAction)linkButtonPressed:(id)sender;

@@ -7,7 +7,7 @@
 //
 
 #import "SettingsTableViewController.h"
-#import "ConfigViewController.h"
+#import "AccountViewController.h"
 
 
 @implementation SettingsTableViewController
@@ -118,7 +118,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  ConfigViewController *vc = [[[ConfigViewController alloc] initWithNibName:@"ConfigView" 
+  AccountViewController *vc = [[[AccountViewController alloc] initWithNibName:@"ConfigView" 
                                                                       bundle:nil] autorelease];
   [self.navigationController pushViewController:vc animated:YES];
 }
