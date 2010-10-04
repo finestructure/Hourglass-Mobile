@@ -113,13 +113,13 @@
 
 
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata {
-  for (DBMetadata* child in metadata.contents) {
-    NSLog(child.path);
+//  for (DBMetadata* child in metadata.contents) {
+//    NSLog(child.path);
 //    NSString* extension = [[child.path pathExtension] lowercaseString];
 //    if (!child.isDirectory && [validExtensions indexOfObject:extension] != NSNotFound) {
 //      [newPhotoPaths addObject:child.path];
 //    }
-  }
+//  }
 }
 
 
