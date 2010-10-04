@@ -25,6 +25,7 @@
 		5AE1014B1256579400B5C973 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1014A1256579400B5C973 /* tasks.png */; };
 		5AE1017B12565B2E00B5C973 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1017912565B2E00B5C973 /* settings@2x.png */; };
 		5AE1017C12565B2E00B5C973 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1017A12565B2E00B5C973 /* tasks@2x.png */; };
+		5AE10314125A732D00B5C973 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE10313125A732D00B5C973 /* SettingsTableViewController.m */; };
 		5AE1FD631254B58800B5C973 /* DBAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */; };
 		5AE1FD641254B58800B5C973 /* DBCreateAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD101254B58700B5C973 /* DBCreateAccountController.m */; };
 		5AE1FD651254B58800B5C973 /* DBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD121254B58700B5C973 /* DBError.m */; };
@@ -99,6 +100,8 @@
 		5AE1014A1256579400B5C973 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tasks.png; path = Resources/tasks.png; sourceTree = "<group>"; };
 		5AE1017912565B2E00B5C973 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Resources/settings@2x.png"; sourceTree = "<group>"; };
 		5AE1017A12565B2E00B5C973 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tasks@2x.png"; path = "Resources/tasks@2x.png"; sourceTree = "<group>"; };
+		5AE10312125A732D00B5C973 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		5AE10313125A732D00B5C973 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		5AE1FD0D1254B58700B5C973 /* DBAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAccountInfo.h; sourceTree = "<group>"; };
 		5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAccountInfo.m; sourceTree = "<group>"; };
 		5AE1FD0F1254B58700B5C973 /* DBCreateAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCreateAccountController.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				5AE1FDCE1254B9C000B5C973 /* ConfigViewController.m */,
 				5AE1FF901255E91800B5C973 /* ProgressViewController.h */,
 				5AE1FF911255E91800B5C973 /* ProgressViewController.m */,
+				5AE10312125A732D00B5C973 /* SettingsTableViewController.h */,
+				5AE10313125A732D00B5C973 /* SettingsTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -537,6 +542,7 @@
 				5AE1FD831254B58800B5C973 /* NSString+Dropbox.m in Sources */,
 				5AE1FDD01254B9C000B5C973 /* ConfigViewController.m in Sources */,
 				5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */,
+				5AE10314125A732D00B5C973 /* SettingsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
