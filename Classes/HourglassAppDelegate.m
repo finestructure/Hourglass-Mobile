@@ -257,6 +257,8 @@
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
   //NSLog(@"Loaded file: %@", destPath);
   self.localPath = destPath;
+  self.managedObjectContext = nil;
+  self.persistentStoreCoordinator = nil;
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   [self.taskViewController fetchEntities];
 }
