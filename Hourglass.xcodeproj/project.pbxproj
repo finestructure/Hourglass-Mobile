@@ -26,6 +26,7 @@
 		5AE1017C12565B2E00B5C973 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1017A12565B2E00B5C973 /* tasks@2x.png */; };
 		5AE10314125A732D00B5C973 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE10313125A732D00B5C973 /* SettingsTableViewController.m */; };
 		5AE103D4125B17DF00B5C973 /* AccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE103D2125B17DF00B5C973 /* AccountView.xib */; };
+		5AE103DC125B2D7A00B5C973 /* DropboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE103DB125B2D7A00B5C973 /* DropboxController.m */; };
 		5AE1FD631254B58800B5C973 /* DBAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */; };
 		5AE1FD641254B58800B5C973 /* DBCreateAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD101254B58700B5C973 /* DBCreateAccountController.m */; };
 		5AE1FD651254B58800B5C973 /* DBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FD121254B58700B5C973 /* DBError.m */; };
@@ -102,6 +103,8 @@
 		5AE10312125A732D00B5C973 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		5AE10313125A732D00B5C973 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		5AE103D3125B17DF00B5C973 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AccountView.xib; sourceTree = "<group>"; };
+		5AE103DA125B2D7A00B5C973 /* DropboxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxController.h; sourceTree = "<group>"; };
+		5AE103DB125B2D7A00B5C973 /* DropboxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxController.m; sourceTree = "<group>"; };
 		5AE1FD0D1254B58700B5C973 /* DBAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAccountInfo.h; sourceTree = "<group>"; };
 		5AE1FD0E1254B58700B5C973 /* DBAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAccountInfo.m; sourceTree = "<group>"; };
 		5AE1FD0F1254B58700B5C973 /* DBCreateAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCreateAccountController.h; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				5AE1FF911255E91800B5C973 /* ProgressViewController.m */,
 				5AE10312125A732D00B5C973 /* SettingsTableViewController.h */,
 				5AE10313125A732D00B5C973 /* SettingsTableViewController.m */,
+				5AE103DA125B2D7A00B5C973 /* DropboxController.h */,
+				5AE103DB125B2D7A00B5C973 /* DropboxController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 				5AE1FDD01254B9C000B5C973 /* AccountViewController.m in Sources */,
 				5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */,
 				5AE10314125A732D00B5C973 /* SettingsTableViewController.m in Sources */,
+				5AE103DC125B2D7A00B5C973 /* DropboxController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
