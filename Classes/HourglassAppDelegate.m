@@ -8,6 +8,7 @@
 
 #import "HourglassAppDelegate.h"
 #import "SettingsTableViewController.h"
+#import "DirectoryViewController.h"
 
 
 @implementation HourglassAppDelegate
@@ -21,7 +22,7 @@
 @synthesize managedObjectModel;
 @synthesize persistentStoreCoordinator;
 @synthesize restClient;
-@synthesize storePath;
+@synthesize localPath;
 @synthesize bgTask;
 
 
@@ -30,22 +31,39 @@
 #pragma mark -
 
 
+-(void)fileChosen:(NSNotification *)notification {
+  NSString *path = [[notification userInfo] objectForKey:@"path"];
+  [self loadFile:path];
+}
+
+
 -(NSString *)loadFile:(NSString *)fileName {
-  NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
-  NSLog(@"Loading file into: %@", path);
-  [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
-  return path;
+  if ([[DBSession sharedSession] isLinked]) {
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    NSLog(@"Loading file into: %@", path);
+    [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+    return path;
+  } else {
+    return nil;
+  }
 }
 
 
 -(void)saveFile {
-  NSLog(@"Saving file %@...", self.storePath);
-  bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-    bgTask = UIBackgroundTaskInvalid;
-  }];
+  if ([[DBSession sharedSession] isLinked]) {
+    NSLog(@"Saving file %@...", self.localPath);
+    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+      [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+      bgTask = UIBackgroundTaskInvalid;
+    }];
   
-  [[self restClient] uploadFile:@"Test2.sqlite" toPath:@"/" fromPath:self.storePath];
+    NSString *fullPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+    NSString *path = [fullPath stringByDeletingLastPathComponent];
+    NSString *filename = [fullPath lastPathComponent];
+    NSLog(@"path: %@", path);
+    NSLog(@"filename: %@", filename);
+    [[self restClient] uploadFile:filename toPath:path fromPath:self.localPath];
+  }
 }
 
 
@@ -74,9 +92,7 @@
   // load DB file
   NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   if (fileName != nil) {
-    if ([[DBSession sharedSession] isLinked]) {
-      [self loadFile:fileName];
-    }
+    [self loadFile:fileName];
   } else {
     if ([[DBSession sharedSession] isLinked]) {
       // show file list on DB
@@ -84,6 +100,11 @@
       // go to link account
     }
   }
+  
+  // notification handler
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(fileChosen:)
+                                               name:kFileChosen object:nil];  
   
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
@@ -107,10 +128,7 @@
 
 -(void)applicationDidEnterBackground:(UIApplication *)application {
   NSLog(@"applicationDidEnterBackground");
-
-  if ([[DBSession sharedSession] isLinked]) {
-    [self saveFile];
-  }
+  [self saveFile];
 }
 
 
@@ -138,7 +156,7 @@
   self.managedObjectModel = nil;
   self.persistentStoreCoordinator = nil;
   self.restClient = nil;
-  self.storePath = nil;
+  self.localPath = nil;
   self.window = nil;
   self.tabBarController = nil;
   self.navController = nil;
@@ -193,7 +211,7 @@
   }
   
   //NSString *path = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Hourglass.sqlite"];
-  NSURL *storeUrl = [NSURL fileURLWithPath:self.storePath];
+  NSURL *storeUrl = [NSURL fileURLWithPath:self.localPath];
   
   NSError *error = nil;
   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -238,7 +256,7 @@
 
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
   //NSLog(@"Loaded file: %@", destPath);
-  self.storePath = destPath;
+  self.localPath = destPath;
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   [self.taskViewController fetchEntities];
 }
