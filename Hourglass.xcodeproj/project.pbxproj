@@ -19,6 +19,10 @@
 		5A4126D812537F680003065F /* Hourglass.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A4126D712537F680003065F /* Hourglass.xcdatamodel */; };
 		5A4C426D1253865B000E3FB2 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C426C1253865B000E3FB2 /* TaskViewController.m */; };
 		5ACA134E125BD11A00336BAB /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ACA134D125BD11A00336BAB /* DirectoryViewController.m */; };
+		5ACA1388125BE1AF00336BAB /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1384125BE1AF00336BAB /* folder.png */; };
+		5ACA1389125BE1AF00336BAB /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1385125BE1AF00336BAB /* folder@2x.png */; };
+		5ACA138A125BE1AF00336BAB /* page_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1386125BE1AF00336BAB /* page_white.png */; };
+		5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1387125BE1AF00336BAB /* page_white@2x.png */; };
 		5AE100C41256129000B5C973 /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100C31256129000B5C973 /* Hourglass.png */; };
 		5AE100CE1256132800B5C973 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100CB1256132800B5C973 /* ProgressView.xib */; };
 		5AE101141256487200B5C973 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE101131256487200B5C973 /* settings.png */; };
@@ -97,6 +101,10 @@
 		5A4C426C1253865B000E3FB2 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		5ACA134C125BD11A00336BAB /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		5ACA134D125BD11A00336BAB /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
+		5ACA1384125BE1AF00336BAB /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder.png; path = Resources/folder.png; sourceTree = "<group>"; };
+		5ACA1385125BE1AF00336BAB /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "folder@2x.png"; path = "Resources/folder@2x.png"; sourceTree = "<group>"; };
+		5ACA1386125BE1AF00336BAB /* page_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page_white.png; path = Resources/page_white.png; sourceTree = "<group>"; };
+		5ACA1387125BE1AF00336BAB /* page_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "page_white@2x.png"; path = "Resources/page_white@2x.png"; sourceTree = "<group>"; };
 		5AE100C31256129000B5C973 /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
 		5AE100CC1256132800B5C973 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ProgressView.xib; sourceTree = "<group>"; };
 		5AE101131256487200B5C973 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/settings.png; sourceTree = "<group>"; };
@@ -277,16 +285,13 @@
 		5A4126AC12537E800003065F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5ACA138C125BE1BE00336BAB /* Images */,
 				5AE103D2125B17DF00B5C973 /* AccountView.xib */,
 				5A4126C912537E800003065F /* MainWindow.xib */,
 				5AE100CB1256132800B5C973 /* ProgressView.xib */,
 				5AE100C31256129000B5C973 /* Hourglass.png */,
 				5A4126BD12537E800003065F /* Hourglass-Info.plist */,
 				5A4126BF12537E800003065F /* InfoPlist.strings */,
-				5AE101131256487200B5C973 /* settings.png */,
-				5AE1017912565B2E00B5C973 /* settings@2x.png */,
-				5AE1014A1256579400B5C973 /* tasks.png */,
-				5AE1017A12565B2E00B5C973 /* tasks@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -309,6 +314,21 @@
 				5A4126B212537E800003065F /* Hourglass.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5ACA138C125BE1BE00336BAB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5AE101131256487200B5C973 /* settings.png */,
+				5AE1017912565B2E00B5C973 /* settings@2x.png */,
+				5AE1014A1256579400B5C973 /* tasks.png */,
+				5AE1017A12565B2E00B5C973 /* tasks@2x.png */,
+				5ACA1384125BE1AF00336BAB /* folder.png */,
+				5ACA1385125BE1AF00336BAB /* folder@2x.png */,
+				5ACA1386125BE1AF00336BAB /* page_white.png */,
+				5ACA1387125BE1AF00336BAB /* page_white@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		5AE1FD0C1254B58700B5C973 /* DropboxSDK */ = {
@@ -502,6 +522,10 @@
 				5AE1017B12565B2E00B5C973 /* settings@2x.png in Resources */,
 				5AE1017C12565B2E00B5C973 /* tasks@2x.png in Resources */,
 				5AE103D4125B17DF00B5C973 /* AccountView.xib in Resources */,
+				5ACA1388125BE1AF00336BAB /* folder.png in Resources */,
+				5ACA1389125BE1AF00336BAB /* folder@2x.png in Resources */,
+				5ACA138A125BE1AF00336BAB /* page_white.png in Resources */,
+				5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

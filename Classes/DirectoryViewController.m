@@ -140,6 +140,9 @@
   cell.textLabel.text = [md.path lastPathComponent];
   if (md.isDirectory) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.imageView.image = [UIImage imageNamed:@"folder.png"];
+  } else {
+    cell.imageView.image = [UIImage imageNamed:@"page_white.png"];
   }
     
   return cell;
