@@ -107,10 +107,13 @@ static DropboxController *sharedInstance = nil;
   if (sharedInstance == nil) {
     self = [super init];
     if (self) {
-      self.userId = @"Loading...";
       if ([[DBSession sharedSession] isLinked]) {
+        self.userId = @"Loading...";
         [[self restClient] loadAccountInfo];
+      } else {
+        self.userId = @"Not linked";
       }
+
     }
   }
   return self;
