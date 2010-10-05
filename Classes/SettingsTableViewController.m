@@ -118,7 +118,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  AccountViewController *vc = [[[AccountViewController alloc] initWithNibName:@"ConfigView" 
+  AccountViewController *vc = [[[AccountViewController alloc] initWithNibName:@"AccountView" 
                                                                       bundle:nil] autorelease];
   [self.navigationController pushViewController:vc animated:YES];
 }
