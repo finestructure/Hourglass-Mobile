@@ -109,6 +109,7 @@
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
   }
   
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   if ([[DBSession sharedSession] isLinked]) {
     if (indexPath.row == 0) {
       cell.textLabel.text = @"Unlink";
