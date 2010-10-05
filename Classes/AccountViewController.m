@@ -7,14 +7,15 @@
 //
 
 #import "AccountViewController.h"
+#import "DropboxController.h"
+#import "DropboxSDK.h"
 
 
 @implementation AccountViewController
 
 @synthesize linkButton;
 @synthesize userIdLabel;
-@synthesize chooseFileButton;
-@synthesize restClient;
+
 
 #pragma mark -
 #pragma mark Workers
@@ -24,7 +25,7 @@
 -(IBAction)linkButtonPressed:(id)sender {
   if (![[DBSession sharedSession] isLinked]) {
     DBLoginController* controller = [[DBLoginController new] autorelease];
-    controller.delegate = self;
+    controller.delegate = [DropboxController sharedInstance];
     [controller presentFromController:self];
   } else {
     [[DBSession sharedSession] unlink];
@@ -38,30 +39,13 @@
 }
 
 
--(IBAction)chooseFilePressed:(id)sender {
-  NSLog(@"Choose file");
-}
-
-
 - (void)linkStatusUIUpdate {
   if ([[DBSession sharedSession] isLinked]) {
     [linkButton setTitle:@"Unlink Dropbox" forState:UIControlStateNormal];
-    self.chooseFileButton.enabled = YES;
   } else {
     [linkButton setTitle:@"Link Dropbox" forState:UIControlStateNormal];
-    self.chooseFileButton.enabled = NO;
   }
 }  
-
-
-- (DBRestClient*)restClient {
-  if (!restClient) {
-    restClient = 
-    [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-    restClient.delegate = self;
-  }
-  return restClient;
-}
 
 
 #pragma mark -
@@ -73,12 +57,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  self.userIdLabel.text = @"";
-  
-  if ([[DBSession sharedSession] isLinked]) {
-    [[self restClient] loadAccountInfo];
-  }
-  
+  self.userIdLabel.text = [[DropboxController sharedInstance] userId];
+    
   [self linkStatusUIUpdate];
 }
 
@@ -101,43 +81,5 @@
     [super dealloc];
 }
 
-
-#pragma mark -
-#pragma mark DB delegate methods
-#pragma mark -
-
-
-- (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
-  self.userIdLabel.text = [NSString stringWithFormat:@"Linked to %@", [info displayName]];
-}
-
-
-- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata {
-//  for (DBMetadata* child in metadata.contents) {
-//    NSLog(child.path);
-//    NSString* extension = [[child.path pathExtension] lowercaseString];
-//    if (!child.isDirectory && [validExtensions indexOfObject:extension] != NSNotFound) {
-//      [newPhotoPaths addObject:child.path];
-//    }
-//  }
-}
-
-
-- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path {
-  NSLog(@"Metadata unchanged!");
-}
-
-
-- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error {
-  NSLog(@"Error loading metadata: %@", error);
-}
-
-
-- (void)loginControllerDidLogin:(DBLoginController*)controller {
-  [self linkStatusUIUpdate];
-}
-
-- (void)loginControllerDidCancel:(DBLoginController*)controller {  
-}
 
 @end

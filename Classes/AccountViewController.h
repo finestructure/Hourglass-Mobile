@@ -7,20 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DropboxSDK.h"
 
 
-@interface AccountViewController : UIViewController<DBLoginControllerDelegate, DBRestClientDelegate> {
+@interface AccountViewController : UIViewController {
 }
 
 -(IBAction)linkButtonPressed:(id)sender;
--(IBAction)chooseFilePressed:(id)sender;
 -(void)linkStatusUIUpdate;
-- (DBRestClient*)restClient;
 
 @property (nonatomic, retain) IBOutlet UIButton* linkButton;
 @property (nonatomic, retain) IBOutlet UILabel* userIdLabel;
-@property (nonatomic, retain) IBOutlet UIButton* chooseFileButton;
-@property (nonatomic, retain) DBRestClient *restClient;
 
 @end

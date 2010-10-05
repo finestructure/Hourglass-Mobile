@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString *userId;
 @property (nonatomic, retain) DBRestClient *restClient;
 
++ (id)sharedInstance;
+
 @end
