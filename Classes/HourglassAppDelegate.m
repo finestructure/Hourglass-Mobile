@@ -128,7 +128,7 @@
 
 -(void)applicationDidEnterBackground:(UIApplication *)application {
   NSLog(@"applicationDidEnterBackground");
-  [self saveFile];
+  //[self saveFile];
 }
 
 
