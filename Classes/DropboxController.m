@@ -15,6 +15,14 @@
 @synthesize restClient;
 
 
+-(void)unlink {
+  [[DBSession sharedSession] unlink];
+  self.restClient = nil;
+  self.userId = NSLocalizedString(@"not linked", @"link status");
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAccountInfoLoaded object:self];
+}
+
+
 - (DBRestClient*)restClient {
   if (!restClient) {
     restClient = 
@@ -99,7 +107,7 @@ static DropboxController *sharedInstance = nil;
   if (sharedInstance == nil) {
     self = [super init];
     if (self) {
-      self.userId = @"–";
+      self.userId = @"Loading...";
       if ([[DBSession sharedSession] isLinked]) {
         [[self restClient] loadAccountInfo];
       }

@@ -28,7 +28,7 @@
     controller.delegate = [DropboxController sharedInstance];
     [controller presentFromController:self];
   } else {
-    [[DBSession sharedSession] unlink];
+    [[DropboxController sharedInstance] unlink];
     [[[[UIAlertView alloc] 
        initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked" 
        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]

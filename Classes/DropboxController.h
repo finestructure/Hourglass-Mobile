@@ -19,5 +19,6 @@ static NSString *kAccountInfoLoaded __attribute__ ((unused)) = @"AccountInfoLoad
 @property (nonatomic, retain) DBRestClient *restClient;
 
 + (id)sharedInstance;
+- (void)unlink;
 
 @end
