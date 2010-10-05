@@ -75,7 +75,9 @@
   NSString *fileName = [@"/" stringByAppendingPathComponent:@"Test.sqlite"]; 
   //[[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   if (fileName != nil) {
-    [self loadFile:fileName];
+    if ([[DBSession sharedSession] isLinked]) {
+      [self loadFile:fileName];
+    }
   } else {
     if ([[DBSession sharedSession] isLinked]) {
       // show file list on DB
@@ -107,7 +109,9 @@
 -(void)applicationDidEnterBackground:(UIApplication *)application {
   NSLog(@"applicationDidEnterBackground");
 
-  [self saveFile];
+  if ([[DBSession sharedSession] isLinked]) {
+    [self saveFile];
+  }
 }
 
 
