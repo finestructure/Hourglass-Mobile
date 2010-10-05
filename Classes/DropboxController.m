@@ -32,6 +32,7 @@
 
 - (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
   self.userId = info.displayName;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAccountInfoLoaded object:self];
 }
 
 

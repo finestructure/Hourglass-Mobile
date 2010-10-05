@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DropboxSDK.h"
 
+static NSString *kAccountInfoLoaded __attribute__ ((unused)) = @"AccountInfoLoaded";
 
 @interface DropboxController : NSObject<DBLoginControllerDelegate, DBRestClientDelegate> {
 
