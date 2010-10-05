@@ -10,7 +10,10 @@
 #import "DropboxController.h"
 
 
-@interface DirectoryViewController : UITableViewController<DBRestClientDelegate> {
+static NSString *kFileChosen __attribute__ ((unused)) = @"FileChosen";
+
+
+@interface DirectoryViewController : UITableViewController<DBRestClientDelegate, UIAlertViewDelegate> {
 
 }
 

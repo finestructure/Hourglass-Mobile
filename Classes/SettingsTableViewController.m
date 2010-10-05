@@ -24,6 +24,11 @@
 }
 
 
+-(void)fileChose:(NSNotification *)notification {
+  [self.tableView reloadData];
+}
+
+
 #pragma mark -
 #pragma mark Initialization
 
@@ -49,6 +54,9 @@
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(accountInfoLoaded:)
                                                name:kAccountInfoLoaded object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(fileChose:)
+                                               name:kFileChosen object:nil];
 }
 
 
@@ -114,7 +122,8 @@
       cell.detailTextLabel.text = [[DropboxController sharedInstance] userId];
     } else if (indexPath.row == 1) {
       cell.textLabel.text = @"Choose File";
-      cell.detailTextLabel.text = @"/Test.sqlite";
+      NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+      cell.detailTextLabel.text = fileName;
     }
   } else {
     if (indexPath.row == 0) {

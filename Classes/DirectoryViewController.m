@@ -58,6 +58,27 @@
 
 
 #pragma mark -
+#pragma mark UIAlertViewDelegate
+#pragma mark -
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 0) {
+    // Cancel
+  } else if (buttonIndex == 1) {
+    // OK
+    NSIndexPath *index = [self.tableView indexPathForSelectedRow];
+    NSString *chosenPath = [[self.metadata objectAtIndex:index.row] path];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:chosenPath forKey:@"path"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFileChosen object:self userInfo:userInfo];
+    [[NSUserDefaults standardUserDefaults] setObject:chosenPath forKey:@"DropboxFileName"];
+    [self.navigationController popViewControllerAnimated:YES];
+  }
+
+}
+
+
+#pragma mark -
 #pragma mark Initialization
 #pragma mark -
 
@@ -200,6 +221,12 @@
     DirectoryViewController *vc = [[[DirectoryViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
     [vc loadMetadata:md.path];
     [self.navigationController pushViewController:vc animated:YES];
+  } else {
+    [[[[UIAlertView alloc] 
+       initWithTitle:@"Choose File" message:@"Do you want to load this file?" 
+       delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil]
+      autorelease]
+     show];
   }
 }
 

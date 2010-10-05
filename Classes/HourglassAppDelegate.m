@@ -72,8 +72,7 @@
   [DBSession setSharedSession:session];
   
   // load DB file
-  NSString *fileName = [@"/" stringByAppendingPathComponent:@"Test.sqlite"]; 
-  //[[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   if (fileName != nil) {
     if ([[DBSession sharedSession] isLinked]) {
       [self loadFile:fileName];
