@@ -24,7 +24,7 @@
 }
 
 
--(void)fileChose:(NSNotification *)notification {
+-(void)fileChosen:(NSNotification *)notification {
   [self.tableView reloadData];
 }
 
@@ -55,7 +55,7 @@
                                            selector:@selector(accountInfoLoaded:)
                                                name:kAccountInfoLoaded object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(fileChose:)
+                                           selector:@selector(fileChosen:)
                                                name:kFileChosen object:nil];
 }
 
