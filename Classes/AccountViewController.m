@@ -40,12 +40,18 @@
 
 
 - (void)linkStatusUIUpdate {
+  self.userIdLabel.text = [[DropboxController sharedInstance] userId];
   if ([[DBSession sharedSession] isLinked]) {
     [linkButton setTitle:@"Unlink Dropbox" forState:UIControlStateNormal];
   } else {
     [linkButton setTitle:@"Link Dropbox" forState:UIControlStateNormal];
   }
 }  
+
+
+-(void)accountInfoLoaded:(NSNotification *)notification {
+  [self linkStatusUIUpdate];
+}
 
 
 #pragma mark -
@@ -57,8 +63,11 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(accountInfoLoaded:)
+                                               name:kAccountInfoLoaded object:nil];
   self.userIdLabel.text = [[DropboxController sharedInstance] userId];
-    
+  
   [self linkStatusUIUpdate];
 }
 
