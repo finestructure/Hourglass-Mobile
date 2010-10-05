@@ -17,5 +17,6 @@
 
 @property (nonatomic, retain) IBOutlet UIButton* linkButton;
 @property (nonatomic, retain) IBOutlet UILabel* userIdLabel;
+@property (nonatomic, retain) IBOutlet UILabel* descriptionLabel;
 
 @end

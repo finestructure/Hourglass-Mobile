@@ -15,6 +15,7 @@
 
 @synthesize linkButton;
 @synthesize userIdLabel;
+@synthesize descriptionLabel;
 
 
 #pragma mark -
@@ -43,8 +44,14 @@
   self.userIdLabel.text = [[DropboxController sharedInstance] userId];
   if ([[DBSession sharedSession] isLinked]) {
     [linkButton setTitle:@"Unlink Dropbox" forState:UIControlStateNormal];
+    self.descriptionLabel.text = NSLocalizedString(@"The application is linked to the "
+                                                   "Dropbox account indicated below.", 
+                                                   @"Account view description");
   } else {
     [linkButton setTitle:@"Link Dropbox" forState:UIControlStateNormal];
+    self.descriptionLabel.text = NSLocalizedString(@"The application is not linked "
+                                                   "to a Dropbox account.", 
+                                                   @"Account view description");
   }
 }  
 
@@ -66,7 +73,6 @@
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(accountInfoLoaded:)
                                                name:kAccountInfoLoaded object:nil];
-  self.userIdLabel.text = [[DropboxController sharedInstance] userId];
   
   [self linkStatusUIUpdate];
 }
