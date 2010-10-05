@@ -8,9 +8,19 @@
 
 #import "SettingsTableViewController.h"
 #import "AccountViewController.h"
+#import "DropboxController.h"
 
 
 @implementation SettingsTableViewController
+
+#pragma mark -
+#pragma mark Workers
+#pragma mark -
+
+
+-(void)accountInfoLoaded:(NSNotification *)notification {
+  [self.tableView reloadData];
+}
 
 
 #pragma mark -
@@ -35,6 +45,10 @@
 
   self.title = NSLocalizedString(@"Settings", @"Settings tab bar item title");
 
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(accountInfoLoaded:)
+                                               name:kAccountInfoLoaded object:nil];
+  
   // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
   // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -88,22 +102,32 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
+  static NSString *CellIdentifier = @"Cell";
+  
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+  }
+  
+  if ([[DBSession sharedSession] isLinked]) {
     if (indexPath.row == 0) {
-      cell.textLabel.text = @"Link";
-      cell.detailTextLabel.text = @"sas@abstracture.de";
+      cell.textLabel.text = @"Unlink";
+      cell.detailTextLabel.text = [[DropboxController sharedInstance] userId];
     } else if (indexPath.row == 1) {
       cell.textLabel.text = @"Choose File";
       cell.detailTextLabel.text = @"/Test.sqlite";
     }
-    
-    return cell;
+  } else {
+    if (indexPath.row == 0) {
+      cell.textLabel.text = @"Link";
+      cell.detailTextLabel.text = [[DropboxController sharedInstance] userId];
+    } else if (indexPath.row == 1) {
+      cell.textLabel.text = @"Choose File";
+      cell.detailTextLabel.text = @"/Test.sqlite";
+    }
+  }
+   
+  return cell;
 }
 
 
