@@ -31,7 +31,7 @@
 
 
 - (void)loadMetadata:(NSString*)path {
-  self.title = path;
+  self.title = [path lastPathComponent];
   [[self restClient] loadMetadata:path];
 }
 
@@ -43,10 +43,6 @@
 
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)md {
   self.metadata = md.contents;
-  for (DBMetadata* child in md.contents) {
-    NSLog(@"path: %@", md.path);
-    NSLog(@"root: %@", md.root);
-  }
   [self.tableView reloadData];
 }
 
@@ -137,11 +133,11 @@
     
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
   }
   
   DBMetadata *md = [self.metadata objectAtIndex:indexPath.row];
-  cell.textLabel.text = md.path;
+  cell.textLabel.text = [md.path lastPathComponent];
   if (md.isDirectory) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
