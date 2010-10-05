@@ -9,6 +9,7 @@
 #import "SettingsTableViewController.h"
 #import "AccountViewController.h"
 #import "DropboxController.h"
+#import "DirectoryViewController.h"
 
 
 @implementation SettingsTableViewController
@@ -140,9 +141,15 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  AccountViewController *vc = [[[AccountViewController alloc] initWithNibName:@"AccountView" 
-                                                                      bundle:nil] autorelease];
-  [self.navigationController pushViewController:vc animated:YES];
+  if (indexPath.row == 0) {
+    AccountViewController *vc = [[[AccountViewController alloc] initWithNibName:@"AccountView" 
+                                                                         bundle:nil] autorelease];
+    [self.navigationController pushViewController:vc animated:YES];
+  } else if (indexPath.row == 1) {
+    DirectoryViewController *vc = [[[DirectoryViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    [vc loadMetadata:@"/"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 
