@@ -21,7 +21,6 @@
 @synthesize managedObjectContext;
 @synthesize managedObjectModel;
 @synthesize persistentStoreCoordinator;
-@synthesize restClient;
 @synthesize statusBar;
 
 
@@ -41,16 +40,6 @@
   self.persistentStoreCoordinator = nil;
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   [self.taskViewController fetchEntities];
-}
-
-
-- (DBRestClient*)restClient {
-  if (!restClient) {
-    restClient = 
-    [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-    restClient.delegate = self;
-  }
-  return restClient;
 }
 
 
@@ -136,7 +125,6 @@
   self.managedObjectContext = nil;
   self.managedObjectModel = nil;
   self.persistentStoreCoordinator = nil;
-  self.restClient = nil;
   self.window = nil;
   self.tabBarController = nil;
   self.navController = nil;

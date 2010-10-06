@@ -22,10 +22,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) StatusBarController *statusBar;
 
 - (NSString *)applicationDocumentsDirectory;
-- (DBRestClient *)restClient;
 
 @end
