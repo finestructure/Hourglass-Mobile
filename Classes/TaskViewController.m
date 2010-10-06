@@ -12,7 +12,7 @@
 
 @implementation TaskViewController
 
-const int kRowHeight = 60;
+const int kRowHeight = 80;
 
 
 @synthesize managedObjectContext;
@@ -143,89 +143,80 @@ const int kRowHeight = 60;
 #pragma mark -
 #pragma mark Configuring table view cells
 
-#define NAME_TAG 1
-#define TIME_TAG 2
-#define IMAGE_TAG 3
 
-#define LEFT_COLUMN_OFFSET 10.0
-#define LEFT_COLUMN_WIDTH 160.0
+const CGFloat kRowWidth = 320;
+const CGFloat kTopOffset = 5;
 
-#define MIDDLE_COLUMN_OFFSET 170.0
-#define MIDDLE_COLUMN_WIDTH 90.0
+const CGFloat kRightOffset = 20;
+const CGFloat kLeftMainOffset = 10;
+const CGFloat kLeftDateOffset = 220;
 
-#define RIGHT_COLUMN_OFFSET 280.0
+const CGFloat kTopHeight = 15;
+const CGFloat kMiddleHeight = 40;
 
-#define MAIN_FONT_SIZE 18.0
-#define LABEL_HEIGHT 26.0
-
-#define IMAGE_SIDE 30.0
 
 - (UITableViewCell *)tableViewCellWithReuseIdentifier:(NSString *)identifier {
 	
 	UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-  
-	/*
-	 Create labels for the text fields; set the highlight color so that when the cell is selected it changes appropriately.
-   */
-	UILabel *label;
-	CGRect rect;
-	
-	// Create a label for the time zone name.
-	rect = CGRectMake(LEFT_COLUMN_OFFSET, (kRowHeight - LABEL_HEIGHT) / 2.0, LEFT_COLUMN_WIDTH, LABEL_HEIGHT);
-	label = [[UILabel alloc] initWithFrame:rect];
-	label.tag = NAME_TAG;
-	label.font = [UIFont boldSystemFontOfSize:MAIN_FONT_SIZE];
-	label.adjustsFontSizeToFitWidth = YES;
-	[cell.contentView addSubview:label];
-	label.highlightedTextColor = [UIColor whiteColor];
-	[label release];
-	
-	// Create a label for the time.
-	rect = CGRectMake(MIDDLE_COLUMN_OFFSET, (kRowHeight - LABEL_HEIGHT) / 2.0, MIDDLE_COLUMN_WIDTH, LABEL_HEIGHT);
-	label = [[UILabel alloc] initWithFrame:rect];
-	label.tag = TIME_TAG;
-	label.font = [UIFont systemFontOfSize:MAIN_FONT_SIZE];
-	label.textAlignment = UITextAlignmentRight;
-	[cell.contentView addSubview:label];
-	label.highlightedTextColor = [UIColor whiteColor];
-	[label release];
-  
-	// Create an image view for the quarter image.
-	rect = CGRectMake(RIGHT_COLUMN_OFFSET, (kRowHeight - IMAGE_SIDE) / 2.0, IMAGE_SIDE, IMAGE_SIDE);
-  
-	UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
-	imageView.tag = IMAGE_TAG;
-	[cell.contentView addSubview:imageView];
-	[imageView release];	
 
+  // date
+  {
+    CGFloat x = kLeftDateOffset;
+    CGFloat y = kTopOffset;
+    CGFloat width = kRowWidth - kLeftDateOffset - kRightOffset;
+    CGFloat height = kTopHeight;
+    CGRect rect = CGRectMake(x, y, width, height);
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    label.tag = 2;
+    label.font = [UIFont systemFontOfSize:12];
+    label.adjustsFontSizeToFitWidth = NO;
+    [cell.contentView addSubview:label];
+    label.highlightedTextColor = [UIColor whiteColor];
+    label.textAlignment = UITextAlignmentRight;
+  }
+  
+  // desc
+  {
+    CGFloat x = kLeftMainOffset;
+    CGFloat y = kTopOffset + kTopHeight;
+    CGFloat width = kRowWidth - kLeftMainOffset - kRightOffset;
+    CGFloat height = kMiddleHeight;
+    CGRect rect = CGRectMake(x, y, width, height);
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    label.tag = 3;
+    label.font = [UIFont boldSystemFontOfSize:18];
+    label.adjustsFontSizeToFitWidth = NO;
+    [cell.contentView addSubview:label];
+    label.highlightedTextColor = [UIColor whiteColor];
+  }
+  
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+  
 	return cell;
 }
 
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
   
-  /*
-	 Cache the formatter. Normally you would use one of the date formatter styles (such as NSDateFormatterShortStyle), but here we want a specific format that excludes seconds.
-	 */
 	static NSDateFormatter *dateFormatter = nil;
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateFormat:@"h:mm a"];
+		[dateFormatter setDateFormat:@"LLL dd"];
 	}
 	
   Task *task = (Task *)[self.tasks objectAtIndex:indexPath.row];
 
-	UILabel *label;
+	// desc
+  {
+    UILabel *label = (UILabel *)[cell viewWithTag:3];
+    label.text = task.desc;
+  }
 	
-	// Set the locale name.
-	label = (UILabel *)[cell viewWithTag:NAME_TAG];
-	label.text = task.desc;
-	
-	// Set the time.
-	label = (UILabel *)[cell viewWithTag:TIME_TAG];
-	label.text = [dateFormatter stringFromDate:task.startDate];
+	// date
+	{
+    UILabel *label = (UILabel *)[cell viewWithTag:2];
+    label.text = [dateFormatter stringFromDate:task.startDate];
+  }
 }    
 
 
