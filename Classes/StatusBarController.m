@@ -14,6 +14,7 @@
 
 @synthesize statusLabel;
 @synthesize statusButton;
+@synthesize progressView;
 
 
 #pragma mark -
@@ -26,12 +27,16 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (0%%)", filename];
+  [self.progressView startAnimating];
+  self.statusButton.hidden = YES;
 }
 
 
 - (void)fileLoaded:(NSNotification *)notification {
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
+  [self.progressView stopAnimating];
+  self.statusButton.hidden = NO;
 }
 
 
@@ -49,12 +54,16 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (0%%)", filename];
+  [self.progressView startAnimating];
+  self.statusButton.hidden = YES;
 }
 
 
 - (void)fileSaved:(NSNotification *)notification {
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
+  [self.progressView stopAnimating];
+  self.statusButton.hidden = NO;
 }
 
 

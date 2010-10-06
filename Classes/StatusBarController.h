@@ -15,5 +15,6 @@
 
 @property (nonatomic, retain) IBOutlet UILabel* statusLabel;
 @property (nonatomic, retain) IBOutlet UIView* statusButton;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* progressView;
 
 @end
