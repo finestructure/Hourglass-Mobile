@@ -150,9 +150,10 @@ const CGFloat kTopOffset = 5;
 const CGFloat kRightOffset = 20;
 const CGFloat kLeftMainOffset = 10;
 const CGFloat kLeftDateOffset = 220;
+const CGFloat kLeftStartOffset = 100;
 
 const CGFloat kTopHeight = 15;
-const CGFloat kMiddleHeight = 40;
+const CGFloat kMiddleHeight = 36;
 
 
 - (UITableViewCell *)tableViewCellWithReuseIdentifier:(NSString *)identifier {
@@ -179,7 +180,7 @@ const CGFloat kMiddleHeight = 40;
   {
     CGFloat x = kLeftDateOffset;
     CGFloat y = kTopOffset;
-    CGFloat width = kRowWidth - kLeftDateOffset - kRightOffset;
+    CGFloat width = kRowWidth - x - kRightOffset;
     CGFloat height = kTopHeight;
     CGRect rect = CGRectMake(x, y, width, height);
     UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
@@ -196,12 +197,27 @@ const CGFloat kMiddleHeight = 40;
   {
     CGFloat x = kLeftMainOffset;
     CGFloat y = kTopOffset + kTopHeight;
-    CGFloat width = kRowWidth - kLeftMainOffset - kRightOffset;
+    CGFloat width = kRowWidth - x - kRightOffset;
     CGFloat height = kMiddleHeight;
     CGRect rect = CGRectMake(x, y, width, height);
     UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
     label.tag = 3;
     label.font = [UIFont boldSystemFontOfSize:18];
+    label.adjustsFontSizeToFitWidth = NO;
+    [cell.contentView addSubview:label];
+    label.highlightedTextColor = [UIColor whiteColor];
+  }
+  
+  // length
+  {
+    CGFloat x = kLeftMainOffset;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
+    CGFloat width = kRowWidth - x - kLeftStartOffset;
+    CGFloat height = kRowHeight - y;
+    CGRect rect = CGRectMake(x, y, width, height);
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    label.tag = 4;
+    label.font = [UIFont boldSystemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
     [cell.contentView addSubview:label];
     label.highlightedTextColor = [UIColor whiteColor];
@@ -239,6 +255,12 @@ const CGFloat kMiddleHeight = 40;
   {
     UILabel *label = (UILabel *)[cell viewWithTag:3];
     label.text = task.desc;
+  }
+  
+	// length
+  {
+    UILabel *label = (UILabel *)[cell viewWithTag:4];
+    label.text = [NSString stringWithFormat:@"%.2f h", [task.length floatValue]];
   }
 }    
 
