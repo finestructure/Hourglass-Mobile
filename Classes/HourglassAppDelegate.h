@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TaskViewController.h"
 #import "DropboxSDK.h"
+#import "StatusBarController.h"
 
 
 @interface HourglassAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate, DBRestClientDelegate> {
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSString *localPath;
 @property (nonatomic) UIBackgroundTaskIdentifier bgTask;
+@property (nonatomic, retain) StatusBarController *statusBar;
 
 - (NSString *)applicationDocumentsDirectory;
 - (NSString *)loadFile:(NSString *)fileName;

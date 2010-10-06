@@ -24,6 +24,7 @@
 @synthesize restClient;
 @synthesize localPath;
 @synthesize bgTask;
+@synthesize statusBar;
 
 
 #pragma mark -
@@ -120,6 +121,9 @@
   self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, settingsController, nil];
   
   [window addSubview:self.tabBarController.view];
+  
+  self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
+  [window addSubview:self.statusBar.view];
   
   [window makeKeyAndVisible];
   return YES;
