@@ -25,6 +25,8 @@
 		5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1387125BE1AF00336BAB /* page_white@2x.png */; };
 		5ACA1428125C7AE900336BAB /* StatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ACA1426125C7AE900336BAB /* StatusBarController.m */; };
 		5ACA1435125C7B5600336BAB /* StatusBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1433125C7B5600336BAB /* StatusBar.xib */; };
+		5ACA1475125C80AE00336BAB /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1474125C80AE00336BAB /* sync.png */; };
+		5ACA1477125C80B600336BAB /* sync@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1476125C80B600336BAB /* sync@2x.png */; };
 		5AE100C41256129000B5C973 /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100C31256129000B5C973 /* Hourglass.png */; };
 		5AE100CE1256132800B5C973 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100CB1256132800B5C973 /* ProgressView.xib */; };
 		5AE101141256487200B5C973 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE101131256487200B5C973 /* settings.png */; };
@@ -110,6 +112,8 @@
 		5ACA1425125C7AE900336BAB /* StatusBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarController.h; sourceTree = "<group>"; };
 		5ACA1426125C7AE900336BAB /* StatusBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarController.m; sourceTree = "<group>"; };
 		5ACA1434125C7B5600336BAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/StatusBar.xib; sourceTree = "<group>"; };
+		5ACA1474125C80AE00336BAB /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sync.png; path = Resources/sync.png; sourceTree = "<group>"; };
+		5ACA1476125C80B600336BAB /* sync@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sync@2x.png"; path = "Resources/sync@2x.png"; sourceTree = "<group>"; };
 		5AE100C31256129000B5C973 /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
 		5AE100CC1256132800B5C973 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ProgressView.xib; sourceTree = "<group>"; };
 		5AE101131256487200B5C973 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/settings.png; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 		5ACA138C125BE1BE00336BAB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5ACA1476125C80B600336BAB /* sync@2x.png */,
+				5ACA1474125C80AE00336BAB /* sync.png */,
 				5AE101131256487200B5C973 /* settings.png */,
 				5AE1017912565B2E00B5C973 /* settings@2x.png */,
 				5AE1014A1256579400B5C973 /* tasks.png */,
@@ -535,6 +541,8 @@
 				5ACA138A125BE1AF00336BAB /* page_white.png in Resources */,
 				5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */,
 				5ACA1435125C7B5600336BAB /* StatusBar.xib in Resources */,
+				5ACA1475125C80AE00336BAB /* sync.png in Resources */,
+				5ACA1477125C80B600336BAB /* sync@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

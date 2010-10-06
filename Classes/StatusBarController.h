@@ -13,4 +13,7 @@
 
 }
 
+@property (nonatomic, retain) IBOutlet UILabel* statusLabel;
+@property (nonatomic, retain) IBOutlet UIView* statusButton;
+
 @end

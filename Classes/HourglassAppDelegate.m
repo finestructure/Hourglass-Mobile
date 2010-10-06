@@ -124,6 +124,7 @@
   
   self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
   [window addSubview:self.statusBar.view];
+  self.statusBar.statusLabel.text = fileName;
   
   [window makeKeyAndVisible];
   return YES;
