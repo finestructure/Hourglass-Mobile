@@ -28,7 +28,6 @@
 		5ACA1475125C80AE00336BAB /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1474125C80AE00336BAB /* sync.png */; };
 		5ACA1477125C80B600336BAB /* sync@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1476125C80B600336BAB /* sync@2x.png */; };
 		5AE100C41256129000B5C973 /* Hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100C31256129000B5C973 /* Hourglass.png */; };
-		5AE100CE1256132800B5C973 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE100CB1256132800B5C973 /* ProgressView.xib */; };
 		5AE101141256487200B5C973 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE101131256487200B5C973 /* settings.png */; };
 		5AE1014B1256579400B5C973 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1014A1256579400B5C973 /* tasks.png */; };
 		5AE1017B12565B2E00B5C973 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1017912565B2E00B5C973 /* settings@2x.png */; };
@@ -82,7 +81,6 @@
 		5AE1FD8E1254B58800B5C973 /* db_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AE1FD621254B58800B5C973 /* db_logo@2x.png */; };
 		5AE1FD941254B5A100B5C973 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE1FD931254B5A100B5C973 /* Security.framework */; };
 		5AE1FDD01254B9C000B5C973 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FDCE1254B9C000B5C973 /* AccountViewController.m */; };
-		5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1FF911255E91800B5C973 /* ProgressViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,7 +113,6 @@
 		5ACA1474125C80AE00336BAB /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sync.png; path = Resources/sync.png; sourceTree = "<group>"; };
 		5ACA1476125C80B600336BAB /* sync@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sync@2x.png"; path = "Resources/sync@2x.png"; sourceTree = "<group>"; };
 		5AE100C31256129000B5C973 /* Hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hourglass.png; sourceTree = "<group>"; };
-		5AE100CC1256132800B5C973 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ProgressView.xib; sourceTree = "<group>"; };
 		5AE101131256487200B5C973 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/settings.png; sourceTree = "<group>"; };
 		5AE1014A1256579400B5C973 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tasks.png; path = Resources/tasks.png; sourceTree = "<group>"; };
 		5AE1017912565B2E00B5C973 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Resources/settings@2x.png"; sourceTree = "<group>"; };
@@ -210,8 +207,6 @@
 		5AE1FD931254B5A100B5C973 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5AE1FDCD1254B9C000B5C973 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		5AE1FDCE1254B9C000B5C973 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		5AE1FF901255E91800B5C973 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
-		5AE1FF911255E91800B5C973 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,8 +232,6 @@
 				5A4C426C1253865B000E3FB2 /* TaskViewController.m */,
 				5AE1FDCD1254B9C000B5C973 /* AccountViewController.h */,
 				5AE1FDCE1254B9C000B5C973 /* AccountViewController.m */,
-				5AE1FF901255E91800B5C973 /* ProgressViewController.h */,
-				5AE1FF911255E91800B5C973 /* ProgressViewController.m */,
 				5AE10312125A732D00B5C973 /* SettingsTableViewController.h */,
 				5AE10313125A732D00B5C973 /* SettingsTableViewController.m */,
 				5AE103DA125B2D7A00B5C973 /* DropboxController.h */,
@@ -299,7 +292,6 @@
 				5ACA1433125C7B5600336BAB /* StatusBar.xib */,
 				5AE103D2125B17DF00B5C973 /* AccountView.xib */,
 				5A4126C912537E800003065F /* MainWindow.xib */,
-				5AE100CB1256132800B5C973 /* ProgressView.xib */,
 				5AE100C31256129000B5C973 /* Hourglass.png */,
 				5A4126BD12537E800003065F /* Hourglass-Info.plist */,
 				5A4126BF12537E800003065F /* InfoPlist.strings */,
@@ -530,7 +522,6 @@
 				5AE1FD8D1254B58800B5C973 /* db_logo.png in Resources */,
 				5AE1FD8E1254B58800B5C973 /* db_logo@2x.png in Resources */,
 				5AE100C41256129000B5C973 /* Hourglass.png in Resources */,
-				5AE100CE1256132800B5C973 /* ProgressView.xib in Resources */,
 				5AE101141256487200B5C973 /* settings.png in Resources */,
 				5AE1014B1256579400B5C973 /* tasks.png in Resources */,
 				5AE1017B12565B2E00B5C973 /* settings@2x.png in Resources */,
@@ -592,7 +583,6 @@
 				5AE1FD821254B58800B5C973 /* NSURLResponse+Encoding.m in Sources */,
 				5AE1FD831254B58800B5C973 /* NSString+Dropbox.m in Sources */,
 				5AE1FDD01254B9C000B5C973 /* AccountViewController.m in Sources */,
-				5AE1FF931255E91800B5C973 /* ProgressViewController.m in Sources */,
 				5AE10314125A732D00B5C973 /* SettingsTableViewController.m in Sources */,
 				5AE103DC125B2D7A00B5C973 /* DropboxController.m in Sources */,
 				5ACA134E125BD11A00336BAB /* DirectoryViewController.m in Sources */,
@@ -625,14 +615,6 @@
 				5ACA1434125C7B5600336BAB /* en */,
 			);
 			name = StatusBar.xib;
-			sourceTree = "<group>";
-		};
-		5AE100CB1256132800B5C973 /* ProgressView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5AE100CC1256132800B5C973 /* en */,
-			);
-			name = ProgressView.xib;
 			sourceTree = "<group>";
 		};
 		5AE103D2125B17DF00B5C973 /* AccountView.xib */ = {
