@@ -162,10 +162,6 @@ const int kRowHeight = 60;
 
 - (UITableViewCell *)tableViewCellWithReuseIdentifier:(NSString *)identifier {
 	
-	/*
-	 Create an instance of UITableViewCell and add tagged subviews for the name, local time, and quarter image of the time zone.
-	 */
-  
 	UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
   
 	/*
@@ -201,7 +197,9 @@ const int kRowHeight = 60;
 	imageView.tag = IMAGE_TAG;
 	[cell.contentView addSubview:imageView];
 	[imageView release];	
-	
+
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 	return cell;
 }
 
