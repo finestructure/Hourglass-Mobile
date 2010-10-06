@@ -20,6 +20,7 @@
 #pragma mark Workers
 #pragma mark -
 
+// load notification handlers
 
 - (void)fileLoadingStarted:(NSNotification *)notification {
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
@@ -40,6 +41,32 @@
   self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (%.0f%%)", filename, [progress floatValue]*100];
 }
 
+
+// save notification handlers
+
+- (void)fileSavingStarted:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  filename = [filename lastPathComponent];
+  self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (0%%)", filename];
+}
+
+
+- (void)fileSaved:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  self.statusLabel.text = [filename lastPathComponent];
+}
+
+
+- (void)fileSaveProgress:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  NSNumber *progress = [[notification userInfo] objectForKey:@"progress"];
+  self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (%.0f%%)", filename, [progress floatValue]*100];
+}
+
+
+// button handler
+
+
 - (void)statusButtonTapped {
   NSLog(@"Sync");
   [[DropboxController sharedInstance] saveFile];
@@ -54,6 +81,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
     // notification handlers
+    // load
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(fileLoadingStarted:)
                                                  name:kFileLoadingStarted object:nil];
@@ -63,6 +91,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(fileLoadProgress:)
                                                  name:kFileLoadProgress object:nil];  
+    // save
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileSavingStarted:)
+                                                 name:kFileSavingStarted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileSaved:)
+                                                 name:kFileSaved object:nil];  
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileSaveProgress:)
+                                                 name:kFileSaveProgress object:nil];  
   }
   return self;
 }

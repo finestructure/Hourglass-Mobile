@@ -13,6 +13,9 @@ static NSString *kAccountInfoLoaded __attribute__ ((unused)) = @"AccountInfoLoad
 static NSString *kFileLoaded __attribute__ ((unused)) = @"FileLoaded";
 static NSString *kFileLoadingStarted __attribute__ ((unused)) = @"FileLoadingStarted";
 static NSString *kFileLoadProgress __attribute__ ((unused)) = @"FileLoadProgress";
+static NSString *kFileSaved __attribute__ ((unused)) = @"FileSaved";
+static NSString *kFileSavingStarted __attribute__ ((unused)) = @"FileSavingStarted";
+static NSString *kFileSaveProgress __attribute__ ((unused)) = @"FileSaveProgress";
 
 @interface DropboxController : NSObject<DBLoginControllerDelegate, DBRestClientDelegate> {
 

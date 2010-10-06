@@ -36,6 +36,7 @@
     NSLog(@"path: %@", path);
     NSLog(@"filename: %@", filename);
     [[self restClient] uploadFile:filename toPath:path fromPath:self.localPath];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFileSavingStarted object:self];
   }
 }
 
@@ -79,12 +80,14 @@
   NSLog(@"Uploaded file: %@", destPath);
   [[UIApplication sharedApplication] endBackgroundTask:bgTask];
   bgTask = UIBackgroundTaskInvalid;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFileSaved object:self];
 }
 
 
 - (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
            forFile:(NSString*)destPath from:(NSString*)srcPath {
-  NSLog(@"Upload progress: %.2f", progress);
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:progress] forKey:@"progress"];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFileSaveProgress object:self userInfo:userInfo];
 }
 
 
