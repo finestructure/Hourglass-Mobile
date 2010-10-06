@@ -37,6 +37,7 @@
 
 - (void)fileLoadProgress:(NSNotification *)notification {
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  filename = [filename lastPathComponent];
   NSNumber *progress = [[notification userInfo] objectForKey:@"progress"];
   self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (%.0f%%)", filename, [progress floatValue]*100];
 }
@@ -59,6 +60,7 @@
 
 - (void)fileSaveProgress:(NSNotification *)notification {
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  filename = [filename lastPathComponent];
   NSNumber *progress = [[notification userInfo] objectForKey:@"progress"];
   self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (%.0f%%)", filename, [progress floatValue]*100];
 }
