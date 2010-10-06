@@ -13,7 +13,7 @@
 @implementation StatusBarController
 
 @synthesize statusLabel;
-@synthesize statusButton;
+@synthesize syncButton;
 @synthesize progressView;
 
 
@@ -28,7 +28,7 @@
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (0%%)", filename];
   [self.progressView startAnimating];
-  self.statusButton.hidden = YES;
+  self.syncButton.hidden = YES;
 }
 
 
@@ -36,7 +36,7 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
   [self.progressView stopAnimating];
-  self.statusButton.hidden = NO;
+  self.syncButton.hidden = NO;
 }
 
 
@@ -55,7 +55,7 @@
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (0%%)", filename];
   [self.progressView startAnimating];
-  self.statusButton.hidden = YES;
+  self.syncButton.hidden = YES;
 }
 
 
@@ -63,7 +63,7 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
   [self.progressView stopAnimating];
-  self.statusButton.hidden = NO;
+  self.syncButton.hidden = NO;
 }
 
 
@@ -78,7 +78,7 @@
 // button handler
 
 
-- (void)statusButtonTapped {
+- (void)syncButtonTapped {
   NSLog(@"Sync");
   [[DropboxController sharedInstance] saveFile];
 }
@@ -121,8 +121,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  UIGestureRecognizer *gr = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(statusButtonTapped)] autorelease];
-  [self.statusButton addGestureRecognizer:gr];
+  UIGestureRecognizer *gr = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(syncButtonTapped)] autorelease];
+  [self.syncButton addGestureRecognizer:gr];
 }
 
 
