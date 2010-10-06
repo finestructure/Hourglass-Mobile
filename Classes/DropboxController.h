@@ -19,9 +19,11 @@ static NSString *kFileLoaded __attribute__ ((unused)) = @"FileLoaded";
 @property (nonatomic, retain) NSString *userId;
 @property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSString *localPath;
+@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 
 + (id)sharedInstance;
 - (void)loadFile:(NSString *)fileName;
+- (void)saveFile;
 - (void)unlink;
 
 @end

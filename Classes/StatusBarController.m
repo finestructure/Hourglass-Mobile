@@ -7,6 +7,7 @@
 //
 
 #import "StatusBarController.h"
+#import "DropboxController.h"
 
 
 @implementation StatusBarController
@@ -22,6 +23,7 @@
 
 - (void)statusButtonTapped {
   NSLog(@"Sync");
+  [[DropboxController sharedInstance] saveFile];
 }
 
 

@@ -14,11 +14,30 @@
 @synthesize userId;
 @synthesize restClient;
 @synthesize localPath;
+@synthesize bgTask;
 
 
 #pragma mark -
 #pragma mark Workers
 #pragma mark -
+
+
+-(void)saveFile {
+  if ([[DBSession sharedSession] isLinked]) {
+    NSLog(@"Saving file %@...", self.localPath);
+    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+      [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+      bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    NSString *fullPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+    NSString *path = [fullPath stringByDeletingLastPathComponent];
+    NSString *filename = [fullPath lastPathComponent];
+    NSLog(@"path: %@", path);
+    NSLog(@"filename: %@", filename);
+    [[self restClient] uploadFile:filename toPath:path fromPath:self.localPath];
+  }
+}
 
 
 -(void)loadFile:(NSString *)fileName {
@@ -51,6 +70,28 @@
 #pragma mark -
 #pragma mark DB delegate methods
 #pragma mark -
+
+
+// save
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath {
+  NSLog(@"Uploaded file: %@", destPath);
+  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+  bgTask = UIBackgroundTaskInvalid;
+}
+
+
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
+           forFile:(NSString*)destPath from:(NSString*)srcPath {
+  NSLog(@"Upload progress: %.2f", progress);
+}
+
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error {
+  NSLog(@"Error saving file: %@", [error userInfo]);  
+  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+  bgTask = UIBackgroundTaskInvalid;
+}
 
 
 // load

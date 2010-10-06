@@ -22,7 +22,6 @@
 @synthesize managedObjectModel;
 @synthesize persistentStoreCoordinator;
 @synthesize restClient;
-@synthesize bgTask;
 @synthesize statusBar;
 
 
@@ -42,24 +41,6 @@
   self.persistentStoreCoordinator = nil;
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   [self.taskViewController fetchEntities];
-}
-
-
--(void)saveFile {
-  if ([[DBSession sharedSession] isLinked]) {
-    NSLog(@"Saving file %@...", [[DropboxController sharedInstance] localPath]);
-    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-      [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-      bgTask = UIBackgroundTaskInvalid;
-    }];
-  
-    NSString *fullPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
-    NSString *path = [fullPath stringByDeletingLastPathComponent];
-    NSString *filename = [fullPath lastPathComponent];
-    NSLog(@"path: %@", path);
-    NSLog(@"filename: %@", filename);
-    [[self restClient] uploadFile:filename toPath:path fromPath:[[DropboxController sharedInstance] localPath]];
-  }
 }
 
 
@@ -131,7 +112,6 @@
 
 -(void)applicationDidEnterBackground:(UIApplication *)application {
   NSLog(@"applicationDidEnterBackground");
-  //[self saveFile];
 }
 
 
@@ -252,28 +232,6 @@
 #pragma mark -
 #pragma mark DB delegate methods
 #pragma mark -
-
-
-// save
-
-- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath from:(NSString*)srcPath {
-  NSLog(@"Uploaded file: %@", destPath);
-  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-  bgTask = UIBackgroundTaskInvalid;
-}
-
-
-- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
-           forFile:(NSString*)destPath from:(NSString*)srcPath {
-  NSLog(@"Upload progress: %.2f", progress);
-}
-
-
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error {
-  NSLog(@"Error saving file: %@", [error userInfo]);  
-  [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-  bgTask = UIBackgroundTaskInvalid;
-}
 
 
 // session
