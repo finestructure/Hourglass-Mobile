@@ -23,12 +23,10 @@
 @property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) DBRestClient *restClient;
-@property (nonatomic, retain) NSString *localPath;
 @property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 @property (nonatomic, retain) StatusBarController *statusBar;
 
 - (NSString *)applicationDocumentsDirectory;
-- (NSString *)loadFile:(NSString *)fileName;
 - (DBRestClient *)restClient;
 
 @end

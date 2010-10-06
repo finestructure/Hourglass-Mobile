@@ -22,7 +22,6 @@
 @synthesize managedObjectModel;
 @synthesize persistentStoreCoordinator;
 @synthesize restClient;
-@synthesize localPath;
 @synthesize bgTask;
 @synthesize statusBar;
 
@@ -34,25 +33,21 @@
 
 -(void)fileChosen:(NSNotification *)notification {
   NSString *path = [[notification userInfo] objectForKey:@"path"];
-  [self loadFile:path];
+  [[DropboxController sharedInstance] loadFile:path];
 }
 
 
--(NSString *)loadFile:(NSString *)fileName {
-  if ([[DBSession sharedSession] isLinked]) {
-    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
-    NSLog(@"Loading file into: %@", path);
-    [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
-    return path;
-  } else {
-    return nil;
-  }
+- (void)fileLoaded:(NSNotification *)notification {
+  self.managedObjectContext = nil;
+  self.persistentStoreCoordinator = nil;
+  self.taskViewController.managedObjectContext = [self managedObjectContext];
+  [self.taskViewController fetchEntities];
 }
 
 
 -(void)saveFile {
   if ([[DBSession sharedSession] isLinked]) {
-    NSLog(@"Saving file %@...", self.localPath);
+    NSLog(@"Saving file %@...", [[DropboxController sharedInstance] localPath]);
     bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
       [[UIApplication sharedApplication] endBackgroundTask:bgTask];
       bgTask = UIBackgroundTaskInvalid;
@@ -63,7 +58,7 @@
     NSString *filename = [fullPath lastPathComponent];
     NSLog(@"path: %@", path);
     NSLog(@"filename: %@", filename);
-    [[self restClient] uploadFile:filename toPath:path fromPath:self.localPath];
+    [[self restClient] uploadFile:filename toPath:path fromPath:[[DropboxController sharedInstance] localPath]];
   }
 }
 
@@ -93,7 +88,7 @@
   // load DB file
   NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   if (fileName != nil) {
-    [self loadFile:fileName];
+    [[DropboxController sharedInstance] loadFile:fileName];
   } else {
     if ([[DBSession sharedSession] isLinked]) {
       // show file list on DB
@@ -102,10 +97,13 @@
     }
   }
   
-  // notification handler
+  // notification handlers
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(fileChosen:)
                                                name:kFileChosen object:nil];  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(fileLoaded:)
+                                               name:kFileLoaded object:nil];  
   
   // set up controller maze
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
@@ -161,7 +159,6 @@
   self.managedObjectModel = nil;
   self.persistentStoreCoordinator = nil;
   self.restClient = nil;
-  self.localPath = nil;
   self.window = nil;
   self.tabBarController = nil;
   self.navController = nil;
@@ -216,7 +213,7 @@
   }
   
   //NSString *path = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Hourglass.sqlite"];
-  NSURL *storeUrl = [NSURL fileURLWithPath:self.localPath];
+  NSURL *storeUrl = [NSURL fileURLWithPath:[[DropboxController sharedInstance] localPath]];
   
   NSError *error = nil;
   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
@@ -255,28 +252,6 @@
 #pragma mark -
 #pragma mark DB delegate methods
 #pragma mark -
-
-
-// load
-
-- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
-  //NSLog(@"Loaded file: %@", destPath);
-  self.localPath = destPath;
-  self.managedObjectContext = nil;
-  self.persistentStoreCoordinator = nil;
-  self.taskViewController.managedObjectContext = [self managedObjectContext];
-  [self.taskViewController fetchEntities];
-}
-
-
-- (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
-  //NSLog(@"Load progress: %.2f", progress);
-}
-
-
-- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
-  NSLog(@"Error loading file: %@", [error userInfo]);
-}
 
 
 // save

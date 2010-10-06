@@ -13,11 +13,21 @@
 
 @synthesize userId;
 @synthesize restClient;
+@synthesize localPath;
 
 
 #pragma mark -
 #pragma mark Workers
 #pragma mark -
+
+
+-(void)loadFile:(NSString *)fileName {
+  if ([[DBSession sharedSession] isLinked]) {
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    NSLog(@"Loading file into: %@", path);
+    [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+  }
+}
 
 
 -(void)unlink {
@@ -42,6 +52,27 @@
 #pragma mark DB delegate methods
 #pragma mark -
 
+
+// load
+
+- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath {
+  NSLog(@"Loaded file: %@", destPath);
+  self.localPath = destPath;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFileLoaded object:self];
+}
+
+
+- (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
+  //NSLog(@"Load progress: %.2f", progress);
+}
+
+
+- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
+  NSLog(@"Error loading file: %@", [error userInfo]);
+}
+
+
+// login
 
 - (void)restClient:(DBRestClient*)client loadedAccountInfo:(DBAccountInfo*)info {
   self.userId = info.displayName;
