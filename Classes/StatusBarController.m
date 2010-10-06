@@ -17,9 +17,28 @@
 
 
 #pragma mark -
-#pragma mark Application Lifecycle
+#pragma mark Workers
 #pragma mark -
 
+
+- (void)fileLoadingStarted:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  filename = [filename lastPathComponent];
+  self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (0%%)", filename];
+}
+
+
+- (void)fileLoaded:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  self.statusLabel.text = [filename lastPathComponent];
+}
+
+
+- (void)fileLoadProgress:(NSNotification *)notification {
+  NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  NSNumber *progress = [[notification userInfo] objectForKey:@"progress"];
+  self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (%.0f%%)", filename, [progress floatValue]*100];
+}
 
 - (void)statusButtonTapped {
   NSLog(@"Sync");
@@ -31,21 +50,28 @@
 #pragma mark Application Lifecycle
 #pragma mark -
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    // notification handlers
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileLoadingStarted:)
+                                                 name:kFileLoadingStarted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileLoaded:)
+                                                 name:kFileLoaded object:nil];  
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fileLoadProgress:)
+                                                 name:kFileLoadProgress object:nil];  
+  }
+  return self;
+}
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
   UIGestureRecognizer *gr = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(statusButtonTapped)] autorelease];
   [self.statusButton addGestureRecognizer:gr];
 }

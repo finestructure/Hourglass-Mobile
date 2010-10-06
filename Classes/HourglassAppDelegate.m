@@ -66,18 +66,6 @@
   session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
   [DBSession setSharedSession:session];
   
-  // load DB file
-  NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
-  if (fileName != nil) {
-    [[DropboxController sharedInstance] loadFile:fileName];
-  } else {
-    if ([[DBSession sharedSession] isLinked]) {
-      // show file list on DB
-    } else {
-      // go to link account
-    }
-  }
-  
   // notification handlers
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(fileChosen:)
@@ -87,6 +75,7 @@
                                                name:kFileLoaded object:nil];  
   
   // set up controller maze
+  self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   self.taskViewController = [[[TaskViewController alloc] init] autorelease];
   self.taskViewController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
@@ -100,12 +89,21 @@
   self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, settingsController, nil];
   
   [window addSubview:self.tabBarController.view];
-  
-  self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
   [window addSubview:self.statusBar.view];
-  self.statusBar.statusLabel.text = fileName;
-  
   [window makeKeyAndVisible];
+
+  // load DB file
+  NSString *fileName = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
+  if (fileName != nil) {
+    [[DropboxController sharedInstance] loadFile:fileName];
+  } else {
+    if ([[DBSession sharedSession] isLinked]) {
+      // show file list on DB
+    } else {
+      // go to link account
+    }
+  }
+  
   return YES;
 }
 

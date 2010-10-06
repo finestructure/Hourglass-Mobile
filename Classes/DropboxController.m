@@ -45,6 +45,7 @@
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     NSLog(@"Loading file into: %@", path);
     [[self restClient] loadFile:[@"/" stringByAppendingPathComponent:fileName] intoPath:path];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFileLoadingStarted object:self];
   }
 }
 
@@ -104,7 +105,8 @@
 
 
 - (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
-  //NSLog(@"Load progress: %.2f", progress);
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:progress] forKey:@"progress"];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFileLoadProgress object:self userInfo:userInfo];
 }
 
 
