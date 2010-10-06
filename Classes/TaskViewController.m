@@ -147,13 +147,13 @@ const int kRowHeight = 80;
 const CGFloat kRowWidth = 320;
 const CGFloat kTopOffset = 5;
 
-const CGFloat kRightOffset = 20;
+const CGFloat kRightOffset = 24;
 const CGFloat kLeftMainOffset = 10;
 const CGFloat kLeftDateOffset = 220;
 const CGFloat kLeftStartOffset = 100;
 
 const CGFloat kTopHeight = 15;
-const CGFloat kMiddleHeight = 36;
+const CGFloat kMiddleHeight = 40;
 
 
 - (UITableViewCell *)tableViewCellWithReuseIdentifier:(NSString *)identifier {
@@ -162,7 +162,7 @@ const CGFloat kMiddleHeight = 36;
 
   // project
   {
-    CGFloat x = kLeftMainOffset;
+    CGFloat x = kLeftMainOffset +2;
     CGFloat y = kTopOffset;
     CGFloat width = kLeftDateOffset - kLeftMainOffset;
     CGFloat height = kTopHeight;
@@ -210,8 +210,8 @@ const CGFloat kMiddleHeight = 36;
   
   // length
   {
-    CGFloat x = kLeftMainOffset;
-    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
+    CGFloat x = kLeftMainOffset +2;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight -5;
     CGFloat width = kRowWidth - x - kLeftStartOffset;
     CGFloat height = kRowHeight - y;
     CGRect rect = CGRectMake(x, y, width, height);
@@ -226,7 +226,7 @@ const CGFloat kMiddleHeight = 36;
   // start & end
   {
     CGFloat x = kLeftStartOffset;
-    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight -5;
     CGFloat width = kRowWidth - x - kRightOffset;
     CGFloat height = kRowHeight - y;
     CGRect rect = CGRectMake(x, y, width, height);
