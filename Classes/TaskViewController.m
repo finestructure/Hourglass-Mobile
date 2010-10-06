@@ -171,9 +171,9 @@ const CGFloat kMiddleHeight = 36;
     label.tag = 1;
     label.font = [UIFont systemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
-    [cell.contentView addSubview:label];
     label.textColor = [UIColor grayColor];
     label.highlightedTextColor = [UIColor whiteColor];
+    [cell.contentView addSubview:label];
   }
   
   // date
@@ -187,10 +187,10 @@ const CGFloat kMiddleHeight = 36;
     label.tag = 2;
     label.font = [UIFont systemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
-    [cell.contentView addSubview:label];
     label.textColor = [UIColor grayColor];
     label.highlightedTextColor = [UIColor whiteColor];
     label.textAlignment = UITextAlignmentRight;
+    [cell.contentView addSubview:label];
   }
   
   // desc
@@ -204,8 +204,8 @@ const CGFloat kMiddleHeight = 36;
     label.tag = 3;
     label.font = [UIFont boldSystemFontOfSize:18];
     label.adjustsFontSizeToFitWidth = NO;
-    [cell.contentView addSubview:label];
     label.highlightedTextColor = [UIColor whiteColor];
+    [cell.contentView addSubview:label];
   }
   
   // length
@@ -219,8 +219,25 @@ const CGFloat kMiddleHeight = 36;
     label.tag = 4;
     label.font = [UIFont boldSystemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
-    [cell.contentView addSubview:label];
     label.highlightedTextColor = [UIColor whiteColor];
+    [cell.contentView addSubview:label];
+  }
+  
+  // start & end
+  {
+    CGFloat x = kLeftStartOffset;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
+    CGFloat width = kRowWidth - x - kRightOffset;
+    CGFloat height = kRowHeight - y;
+    CGRect rect = CGRectMake(x, y, width, height);
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    label.tag = 5;
+    label.font = [UIFont systemFontOfSize:12];
+    label.adjustsFontSizeToFitWidth = NO;
+    label.textColor = [UIColor grayColor];
+    label.highlightedTextColor = [UIColor whiteColor];
+    label.textAlignment = UITextAlignmentRight;
+    [cell.contentView addSubview:label];
   }
   
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -235,6 +252,11 @@ const CGFloat kMiddleHeight = 36;
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateFormat:@"LLL dd"];
+	}
+	static NSDateFormatter *timeFormatter = nil;
+	if (timeFormatter == nil) {
+		timeFormatter = [[NSDateFormatter alloc] init];
+		[timeFormatter setDateFormat:@"HH:mm"];
 	}
 	
   Task *task = (Task *)[self.tasks objectAtIndex:indexPath.row];
@@ -261,6 +283,12 @@ const CGFloat kMiddleHeight = 36;
   {
     UILabel *label = (UILabel *)[cell viewWithTag:4];
     label.text = [NSString stringWithFormat:@"%.2f h", [task.length floatValue]];
+  }
+  
+	// start + end
+  {
+    UILabel *label = (UILabel *)[cell viewWithTag:5];
+    label.text = [NSString stringWithFormat:@"%@ – %@", [timeFormatter stringFromDate:task.startDate], [timeFormatter stringFromDate:task.endDate]];
   }
 }    
 
