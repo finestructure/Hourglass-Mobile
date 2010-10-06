@@ -220,8 +220,6 @@
 #pragma mark -
 
 
-// session
-
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session {
   DBLoginController* loginController = [[DBLoginController new] autorelease];
   [loginController presentFromController:self.tabBarController];
