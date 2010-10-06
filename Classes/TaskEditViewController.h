@@ -16,5 +16,6 @@
 
 @property (nonatomic, retain) IBOutlet UITextView *descriptionView;
 @property (nonatomic, retain) Task *task;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @end

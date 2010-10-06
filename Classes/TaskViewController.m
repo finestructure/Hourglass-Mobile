@@ -373,6 +373,7 @@ const CGFloat kMiddleHeight = 40;
 	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
   TaskEditViewController *vc = [[[TaskEditViewController alloc] initWithNibName:@"TaskEditView" bundle:nil] autorelease];
   vc.task = [self.tasks objectAtIndex:indexPath.row];
+  vc.managedObjectContext = self.managedObjectContext;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -13,6 +13,7 @@
 
 @synthesize descriptionView;
 @synthesize task;
+@synthesize managedObjectContext;
 
 
 #pragma mark -
@@ -20,8 +21,17 @@
 
 
 - (void)textViewDidChange:(UITextView *)textView {
-  NSLog(@"in textViewDidChange: %@", textView.text);
-  [self.task setValue:textView.text forKey:@"desc"];
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+  NSLog(@"did end editing");
+  self.task.desc = textView.text;
+  NSError *error;
+  if (![self.managedObjectContext save:&error]) {
+    // Handle the error.
+    NSLog(@"Error while saving task: %@", [error userInfo]);
+  }
 }
 
 
