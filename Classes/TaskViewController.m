@@ -159,6 +159,22 @@ const CGFloat kMiddleHeight = 40;
 	
 	UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
 
+  // project
+  {
+    CGFloat x = kLeftMainOffset;
+    CGFloat y = kTopOffset;
+    CGFloat width = kLeftDateOffset - kLeftMainOffset;
+    CGFloat height = kTopHeight;
+    CGRect rect = CGRectMake(x, y, width, height);
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    label.tag = 1;
+    label.font = [UIFont systemFontOfSize:12];
+    label.adjustsFontSizeToFitWidth = NO;
+    [cell.contentView addSubview:label];
+    label.textColor = [UIColor grayColor];
+    label.highlightedTextColor = [UIColor whiteColor];
+  }
+  
   // date
   {
     CGFloat x = kLeftDateOffset;
@@ -171,6 +187,7 @@ const CGFloat kMiddleHeight = 40;
     label.font = [UIFont systemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
     [cell.contentView addSubview:label];
+    label.textColor = [UIColor grayColor];
     label.highlightedTextColor = [UIColor whiteColor];
     label.textAlignment = UITextAlignmentRight;
   }
@@ -206,16 +223,22 @@ const CGFloat kMiddleHeight = 40;
 	
   Task *task = (Task *)[self.tasks objectAtIndex:indexPath.row];
 
-	// desc
+	// project
   {
-    UILabel *label = (UILabel *)[cell viewWithTag:3];
-    label.text = task.desc;
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
+    label.text = [task.project name];
   }
 	
 	// date
 	{
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     label.text = [dateFormatter stringFromDate:task.startDate];
+  }
+
+	// desc
+  {
+    UILabel *label = (UILabel *)[cell viewWithTag:3];
+    label.text = task.desc;
   }
 }    
 
