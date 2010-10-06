@@ -8,6 +8,7 @@
 
 #import "TaskViewController.h"
 #import "Task.h"
+#import "TaskEditViewController.h"
 
 
 @implementation TaskViewController
@@ -365,34 +366,14 @@ const CGFloat kMiddleHeight = 40;
 }
 
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
+  TaskEditViewController *vc = [[[TaskEditViewController alloc] initWithNibName:@"TaskEditView" bundle:nil] autorelease];
+  vc.task = [self.tasks objectAtIndex:indexPath.row];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 
