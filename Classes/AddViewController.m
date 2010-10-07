@@ -15,17 +15,6 @@
   self.title = @"New Task";
   self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)] autorelease];
   self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)] autorelease];
-	
-	// Set up the undo manager and set editing state to YES.
-	[self setUpUndoManager];
-	self.editing = YES;
-}
-
-
-- (void)viewDidUnload {
-	[super viewDidUnload];
-	// Release any properties that are loaded in viewDidLoad or can be recreated lazily.
-	[self cleanUpUndoManager];	
 }
 
 
