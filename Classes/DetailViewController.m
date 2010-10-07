@@ -95,15 +95,15 @@
 	
 	switch (indexPath.row) {
         case 0: 
-			cell.textLabel.text = @"Description";
+			cell.textLabel.text = @"description";
 			cell.detailTextLabel.text = task.desc;
 			break;
         case 1: 
-			cell.textLabel.text = @"Start Date";
+			cell.textLabel.text = @"start date";
 			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.endDate];
 			break;
         case 2:
-			cell.textLabel.text = @"Start Date";
+			cell.textLabel.text = @"end date";
 			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.startDate];
 			break;
     }
