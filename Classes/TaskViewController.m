@@ -8,7 +8,7 @@
 
 #import "TaskViewController.h"
 #import "Task.h"
-#import "TaskEditViewController.h"
+#import "DetailViewController.h"
 
 
 @implementation TaskViewController
@@ -409,11 +409,11 @@ const CGFloat kMiddleHeight = 40;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
-  TaskEditViewController *vc = [[[TaskEditViewController alloc] initWithNibName:@"TaskEditView" bundle:nil] autorelease];
-  vc.task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  vc.managedObjectContext = self.managedObjectContext;
-  [self.navigationController pushViewController:vc animated:YES];
+	DetailViewController *detailViewController = [[DetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+  Task *task = (Task *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+  detailViewController.task = task;
+	[self.navigationController pushViewController:detailViewController animated:YES];
+	[detailViewController release];
 }
 
 
