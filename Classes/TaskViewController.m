@@ -22,7 +22,6 @@ const int kRowHeight = 80;
 
 #pragma mark -
 #pragma mark Workers
-#pragma mark -
 
 
 -(void)fetchEntities {
@@ -38,7 +37,6 @@ const int kRowHeight = 80;
 
 #pragma mark -
 #pragma mark Initialization
-#pragma mark -
 
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -60,9 +58,11 @@ const int kRowHeight = 80;
   // Set up the buttons
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
+  /*
   UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] 
     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)] autorelease];
   self.navigationItem.rightBarButtonItem = addButton;
+   */
   
   self.tableView.rowHeight = kRowHeight;
 }
@@ -97,31 +97,6 @@ const int kRowHeight = 80;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
-
-
-#pragma mark -
-#pragma mark Workers
-#pragma mark -
-
-
--(void)addTask {
-//  id task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
-  
-  NSError *error;
-  if (![self.managedObjectContext save:&error]) {
-    // Handle the error.
-    NSLog(@"Error while saving task: %@", [error userInfo]);
-  }
-  
-  //  [tasksArray addObject:task];
-  //  [self.tableView reloadData];
-//  [self.tasks insertObject:task atIndex:0];
-  NSIndexPath *ip = [NSIndexPath indexPathForRow:0 inSection:0];
-  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:ip]
-                        withRowAnimation:UITableViewRowAnimationFade];
-  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] 
-                        atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
 
 
 #pragma mark -
