@@ -61,11 +61,11 @@
 			break;
     case 1: 
 			cell.textLabel.text = @"start date";
-			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.endDate];
+			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.startDate];
 			break;
     case 2:
 			cell.textLabel.text = @"end date";
-			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.startDate];
+			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.endDate];
 			break;
   }
   return cell;
