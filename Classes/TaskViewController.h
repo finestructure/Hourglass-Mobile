@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface TaskViewController : UITableViewController {
+@interface TaskViewController : UITableViewController<NSFetchedResultsControllerDelegate> {
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSMutableArray *tasks;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
--(void)fetchEntities;
+- (void)fetchEntities;
+- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
 
 @end

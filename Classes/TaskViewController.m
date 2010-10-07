@@ -17,7 +17,7 @@ const int kRowHeight = 80;
 
 
 @synthesize managedObjectContext;
-@synthesize tasks;
+@synthesize fetchedResultsController;
 
 
 #pragma mark -
@@ -27,27 +27,12 @@ const int kRowHeight = 80;
 
 -(void)fetchEntities {
   NSLog(@"Fetching entities");
-  NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-  NSEntityDescription *entity = [NSEntityDescription 
-                                 entityForName:@"Task"
-                                 inManagedObjectContext:self.managedObjectContext];
-  [request setEntity:entity];
-
-  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
-                                                                   ascending:NO];
-  NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-  [request setSortDescriptors:sortDescriptors];
 
   NSError *error;
-  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-  if (mutableFetchResults == nil) {
-    // Handle the error.
+  BOOL success = [self.fetchedResultsController performFetch:&error];
+  if (!success) {
     NSLog(@"Error while fetching tasks: %@", [error userInfo]);
   }
-
-  self.tasks = mutableFetchResults;
-  [mutableFetchResults release];
-  [self.tableView reloadData];
 }
 
 
@@ -56,26 +41,22 @@ const int kRowHeight = 80;
 #pragma mark -
 
 
-/*
 - (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if ((self = [super initWithStyle:style])) {
-    }
-    return self;
+  if ((self = [super initWithStyle:style])) {
+    self.title = NSLocalizedString(@"Tasks", @"Task tab bar item title");
+    self.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
+  }
+  return self;
 }
-*/
 
 
 #pragma mark -
 #pragma mark View lifecycle
-#pragma mark -
 
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.title = @"Tasks";
-    
   // Set up the buttons
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
@@ -87,11 +68,13 @@ const int kRowHeight = 80;
 }
 
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+  [super viewWillAppear:animated];
+  [self.tableView reloadData];
 }
-*/
+
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -122,7 +105,7 @@ const int kRowHeight = 80;
 
 
 -(void)addTask {
-  id task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+//  id task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
   
   NSError *error;
   if (![self.managedObjectContext save:&error]) {
@@ -132,12 +115,99 @@ const int kRowHeight = 80;
   
   //  [tasksArray addObject:task];
   //  [self.tableView reloadData];
-  [self.tasks insertObject:task atIndex:0];
+//  [self.tasks insertObject:task atIndex:0];
   NSIndexPath *ip = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:ip]
                         withRowAnimation:UITableViewRowAnimationFade];
   [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] 
                         atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+
+#pragma mark -
+#pragma mark Fetched results controller
+
+/**
+ Returns the fetched results controller. Creates and configures the controller if necessary.
+ */
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (fetchedResultsController != nil) {
+    return fetchedResultsController;
+  }
+  
+	// Create and configure a fetch request
+  NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+  NSEntityDescription *entity = [NSEntityDescription 
+                                 entityForName:@"Task"
+                                 inManagedObjectContext:self.managedObjectContext];
+  [fetchRequest setEntity:entity];
+
+  // Create the sort descriptors array
+  NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                   ascending:NO];
+  [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+		
+	// Create and initialize the fetch results controller
+  self.fetchedResultsController = [[[NSFetchedResultsController alloc]
+                                    initWithFetchRequest:fetchRequest
+                                    managedObjectContext:self.managedObjectContext
+                                    sectionNameKeyPath:nil
+                                    cacheName:nil] autorelease];
+	fetchedResultsController.delegate = self;
+	
+	return fetchedResultsController;
+}    
+
+
+/**
+ Delegate methods of NSFetchedResultsController to respond to additions, removals and so on.
+ */
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+  NSLog(@"begin update");
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+	UITableView *tableView = self.tableView;
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeUpdate:
+			[self configureCell:[tableView cellForRowAtIndexPath:indexPath] forIndexPath:indexPath];
+			break;
+			
+		case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+      [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  NSLog(@"end update");
+	[self.tableView endUpdates];
 }
 
 
@@ -260,7 +330,7 @@ const CGFloat kMiddleHeight = 40;
 		[timeFormatter setDateFormat:@"HH:mm"];
 	}
 	
-  Task *task = (Task *)[self.tasks objectAtIndex:indexPath.row];
+  Task *task = (Task *)[self.fetchedResultsController objectAtIndexPath:indexPath];
 
 	// project
   {
@@ -297,15 +367,15 @@ const CGFloat kMiddleHeight = 40;
 #pragma mark -
 #pragma mark Table view data source
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+  return [[self.fetchedResultsController sections] count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  // Return the number of rows in the section.
-  return [self.tasks count];
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+  return [sectionInfo numberOfObjects];
 }
 
 
@@ -345,24 +415,18 @@ const CGFloat kMiddleHeight = 40;
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    // Delete the managed object at the given index path.
-    NSManagedObject *toDelete = [self.tasks objectAtIndex:indexPath.row];
-    [managedObjectContext deleteObject:toDelete];
-    
-    // Update the array and table view.
-    [self.tasks removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                        withRowAnimation:YES];
-    
-    // Commit the change.
-    NSError *error;
-    if (![managedObjectContext save:&error]) {
-      // Handle the error.
-      NSLog(@"Error while deleting task: %@", [error userInfo]);
-    }
-  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-  }   
+		
+		// Delete the managed object.
+		NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+		[context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+		
+		NSError *error;
+		if (![context save:&error]) {
+			// Update to handle the error appropriately.
+			NSLog(@"Error in tableView:commitEditingStyle: %@, %@", error, [error userInfo]);
+		}
+  } 
+  
 }
 
 
@@ -372,7 +436,7 @@ const CGFloat kMiddleHeight = 40;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
   TaskEditViewController *vc = [[[TaskEditViewController alloc] initWithNibName:@"TaskEditView" bundle:nil] autorelease];
-  vc.task = [self.tasks objectAtIndex:indexPath.row];
+  vc.task = [self.fetchedResultsController objectAtIndexPath:indexPath];
   vc.managedObjectContext = self.managedObjectContext;
   [self.navigationController pushViewController:vc animated:YES];
 }
@@ -390,13 +454,13 @@ const CGFloat kMiddleHeight = 40;
 
 - (void)viewDidUnload {
   // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-  self.tasks = nil;
+  self.fetchedResultsController = nil;
 }
 
 
 - (void)dealloc {
   [self.managedObjectContext release];
-  [self.tasks release];
+  [self.fetchedResultsController release];
   [super dealloc];
 }
 

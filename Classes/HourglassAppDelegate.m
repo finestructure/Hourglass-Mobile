@@ -38,6 +38,12 @@
 - (void)fileLoaded:(NSNotification *)notification {
   self.managedObjectContext = nil;
   self.persistentStoreCoordinator = nil;
+  if (self.taskViewController == nil) {
+    self.taskViewController = [[[TaskViewController alloc] init] autorelease];
+    self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
+    UIViewController *settingsController = [[self.tabBarController viewControllers] objectAtIndex:1];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navController, settingsController, nil];
+  }
   self.taskViewController.managedObjectContext = [self managedObjectContext];
   [self.taskViewController fetchEntities];
 }
@@ -66,16 +72,17 @@
   // set up controller maze
   self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-  self.taskViewController = [[[TaskViewController alloc] init] autorelease];
-  self.taskViewController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
-  self.taskViewController.title = NSLocalizedString(@"Tasks", @"Task tab bar item title");
-  self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
+  UIViewController *vc = [[[UIViewController alloc] init] autorelease];
+  // add an empty placehoder 'task controller' while the file is being loaded
+  vc.title = NSLocalizedString(@"Tasks", @"Task tab bar item title");
+  vc.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
+  self.navController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
   
   SettingsTableViewController *tv = [[[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
   UINavigationController *settingsController = [[[UINavigationController alloc] initWithRootViewController:tv] autorelease];
   settingsController.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
   settingsController.title = NSLocalizedString(@"Settings", @"Settings tab bar item title");
-  self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, settingsController, nil];
+  self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navController, settingsController, nil];
   
   [window addSubview:self.tabBarController.view];
   [window addSubview:self.statusBar.view];
