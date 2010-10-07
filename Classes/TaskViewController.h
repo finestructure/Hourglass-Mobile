@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddViewController.h"
 
 
-@interface TaskViewController : UITableViewController<NSFetchedResultsControllerDelegate> {
+@interface TaskViewController : UITableViewController<NSFetchedResultsControllerDelegate, AddViewControllerDelegate> {
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSManagedObjectContext *addingManagedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (void)fetchEntities;
