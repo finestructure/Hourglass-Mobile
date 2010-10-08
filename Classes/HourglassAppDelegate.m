@@ -85,7 +85,7 @@
   self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navController, settingsController, nil];
   
   [window addSubview:self.tabBarController.view];
-  [window addSubview:self.statusBar.view];
+  //[window addSubview:self.statusBar.view];
   [window makeKeyAndVisible];
 
   // load DB file
