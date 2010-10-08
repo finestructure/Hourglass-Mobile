@@ -50,26 +50,26 @@
 #pragma mark Save and cancel operations
 
 - (IBAction)save {
+  NSLog(@"saving");
+  
+  // pass current value to the edited object, then pop.
+  if (editingDate) {
+    [editedObject setValue:datePicker.date forKey:editedFieldKey];
+  } else {
+    [editedObject setValue:textField.text forKey:editedFieldKey];
+  }
 	
-	// Set the action name for the undo operation.
-	NSUndoManager * undoManager = [[editedObject managedObjectContext] undoManager];
-	[undoManager setActionName:[NSString stringWithFormat:@"%@", editedFieldName]];
-	
-    // Pass current value to the edited object, then pop.
-    if (editingDate) {
-        [editedObject setValue:datePicker.date forKey:editedFieldKey];
-    }
-	else {
-        [editedObject setValue:textField.text forKey:editedFieldKey];
-    }
-	
-    [self.navigationController popViewControllerAnimated:YES];
+  NSError *error;
+  if (![[editedObject managedObjectContext] save:&error]) {
+    NSLog(@"Error while saving task %@, %@", error, [error userInfo]);
+  }
+
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 
 - (IBAction)cancel {
-    // Don't pass current value to the edited object, just pop.
-    [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 
