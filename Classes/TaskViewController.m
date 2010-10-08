@@ -65,6 +65,55 @@ const int kRowHeight = 80;
   self.navigationItem.rightBarButtonItem = addButton;
   
   self.tableView.rowHeight = kRowHeight;
+
+  // test
+  
+  UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tasks.png"] style:UIBarButtonItemStylePlain target:self action:nil];
+
+  UIBarButtonItem *labelButton = [[UIBarButtonItem alloc] initWithTitle:@"Sync" style:UIBarButtonItemStyleBordered target:self action:nil];
+  
+  UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
+  labelView.text = @"My Label";
+  labelView.textAlignment = UITextAlignmentCenter;
+  labelView.backgroundColor = [UIColor clearColor];
+  labelView.textColor = [UIColor whiteColor];
+  labelView.font = [UIFont systemFontOfSize:14];
+  UIBarButtonItem *labelButton2 = [[UIBarButtonItem alloc] initWithCustomView:labelView];
+  
+  self.navigationController.toolbarHidden = NO;
+  self.toolbarItems = [NSArray arrayWithObjects:
+                       labelButton,
+                       labelButton2,
+                       testButton, nil];
+  
+  UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
+                                          [NSArray arrayWithObjects:
+                                           [UIImage imageNamed:@"tasks.png"],
+                                           [UIImage imageNamed:@"sync.png"],
+                                           nil]];
+  
+  [segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+  segmentedControl.frame = CGRectMake(0, 0, 90, 24);
+  segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+  segmentedControl.momentary = YES;
+  
+  UIBarButtonItem *segmentBarItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+  [segmentedControl release];
+  
+  self.navigationItem.rightBarButtonItem = segmentBarItem;
+  //self.navigationItem.titleView = segmentBarItem;
+  [segmentBarItem release];
+  
+  CGFloat barHeight = self.navigationController.navigationBar.frame.size.height;
+  
+  CGRect  viewRect = CGRectMake(0, 0, 100, barHeight);
+  UIView* myView = [[UIView alloc] initWithFrame:viewRect];
+  UIButton *button = [UIButton buttonWithType:2];
+  button.titleLabel.text = @"MyButton";
+  UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tasks.png"]];
+  [myView addSubview:iv];
+  //myView.backgroundColor = [UIColor blackColor];
+  self.navigationItem.titleView = iv;
 }
 
 
