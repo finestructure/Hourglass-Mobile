@@ -40,7 +40,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 
@@ -67,6 +67,10 @@
 			cell.textLabel.text = @"end";
 			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.endDate];
 			break;
+    case 3:
+			cell.textLabel.text = @"length";
+			cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2f h", [task.length floatValue]];
+			break;
   }
   return cell;
 }
@@ -91,6 +95,11 @@
       controller.editedFieldKey = @"endDate";
 			controller.editedFieldName = NSLocalizedString(@"End", @"display name for end date");
 			controller.editingDate = YES;
+    } break;
+    case 3: {
+      controller.editedFieldKey = @"length";
+      controller.editedFieldName = NSLocalizedString(@"Length", @"display name for length");
+      controller.editingDate = NO;
     } break;
   }
 	
