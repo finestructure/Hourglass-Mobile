@@ -65,28 +65,6 @@ const int kRowHeight = 80;
   self.navigationItem.rightBarButtonItem = addButton;
   
   self.tableView.rowHeight = kRowHeight;
-
-  // test
-  CGFloat barHeight = self.navigationController.toolbar.frame.size.height;
-  
-  UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tasks.png"] style:UIBarButtonItemStylePlain target:self action:nil];
-
-  UIBarButtonItem *syncButton = [[UIBarButtonItem alloc] initWithTitle:@"Sync" style:UIBarButtonItemStyleBordered target:self action:nil];
-  
-  UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, barHeight)];
-  labelView.text = @"Some Very Long Filename";
-  labelView.textAlignment = UITextAlignmentLeft;
-  labelView.backgroundColor = [UIColor clearColor];
-  labelView.textColor = [UIColor whiteColor];
-  labelView.font = [UIFont systemFontOfSize:14];
-  UIBarButtonItem *filenameLabel = [[UIBarButtonItem alloc] initWithCustomView:labelView];
-  
-  self.navigationController.toolbarHidden = NO;
-  self.toolbarItems = [NSArray arrayWithObjects:
-                       testButton,
-                       syncButton,
-                       filenameLabel, nil];
-    
 }
 
 

@@ -40,7 +40,9 @@
   self.persistentStoreCoordinator = nil;
   if (self.taskViewController == nil) {
     self.taskViewController = [[[TaskViewController alloc] init] autorelease];
+    self.taskViewController.toolbarItems = self.statusBar.toolbarItems;
     self.navController = [[[UINavigationController alloc] initWithRootViewController:self.taskViewController] autorelease];
+    self.navController.toolbarHidden = NO;
     UIViewController *settingsController = [[self.tabBarController viewControllers] objectAtIndex:1];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navController, settingsController, nil];
   }
@@ -70,7 +72,7 @@
                                                name:kFileLoaded object:nil];  
   
   // set up controller maze
-  self.statusBar = [[[StatusBarController alloc] initWithNibName:@"StatusBar" bundle:nil] autorelease];
+  self.statusBar = [[[StatusBarController alloc] init] autorelease];
   self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   UIViewController *vc = [[[UIViewController alloc] init] autorelease];
   // add an empty placehoder 'task controller' while the file is being loaded

@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface StatusBarController : UIViewController {
+@interface StatusBarController : NSObject {
 
 }
 
-@property (nonatomic, retain) IBOutlet UILabel* statusLabel;
-@property (nonatomic, retain) IBOutlet UIView* syncButton;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* progressView;
+@property (nonatomic, retain) NSArray *toolbarItems;
+@property (nonatomic, retain) UILabel *statusLabel;
+@property (nonatomic, retain) UIBarButtonItem *saveButton;
+@property (nonatomic, retain) UIActivityIndicatorView *progressView;
 
 @end

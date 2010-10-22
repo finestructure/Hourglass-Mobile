@@ -24,7 +24,6 @@
 		5ACA138A125BE1AF00336BAB /* page_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1386125BE1AF00336BAB /* page_white.png */; };
 		5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1387125BE1AF00336BAB /* page_white@2x.png */; };
 		5ACA1428125C7AE900336BAB /* StatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ACA1426125C7AE900336BAB /* StatusBarController.m */; };
-		5ACA1435125C7B5600336BAB /* StatusBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1433125C7B5600336BAB /* StatusBar.xib */; };
 		5ACA1475125C80AE00336BAB /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1474125C80AE00336BAB /* sync.png */; };
 		5ACA1477125C80B600336BAB /* sync@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACA1476125C80B600336BAB /* sync@2x.png */; };
 		5AD6BBD6125E176100A1490F /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6BBD5125E176100A1490F /* AddViewController.m */; };
@@ -113,7 +112,6 @@
 		5ACA1387125BE1AF00336BAB /* page_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "page_white@2x.png"; path = "Resources/page_white@2x.png"; sourceTree = "<group>"; };
 		5ACA1425125C7AE900336BAB /* StatusBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarController.h; sourceTree = "<group>"; };
 		5ACA1426125C7AE900336BAB /* StatusBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarController.m; sourceTree = "<group>"; };
-		5ACA1434125C7B5600336BAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/StatusBar.xib; sourceTree = "<group>"; };
 		5ACA1474125C80AE00336BAB /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sync.png; path = Resources/sync.png; sourceTree = "<group>"; };
 		5ACA1476125C80B600336BAB /* sync@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sync@2x.png"; path = "Resources/sync@2x.png"; sourceTree = "<group>"; };
 		5AD6BBD4125E176100A1490F /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				5ADBAA96125E0D5D00D081EF /* EditingView.xib */,
-				5ACA1433125C7B5600336BAB /* StatusBar.xib */,
 				5AE103D2125B17DF00B5C973 /* AccountView.xib */,
 				5A4126C912537E800003065F /* MainWindow.xib */,
 				5AE100C31256129000B5C973 /* Hourglass.png */,
@@ -549,7 +546,6 @@
 				5ACA1389125BE1AF00336BAB /* folder@2x.png in Resources */,
 				5ACA138A125BE1AF00336BAB /* page_white.png in Resources */,
 				5ACA138B125BE1AF00336BAB /* page_white@2x.png in Resources */,
-				5ACA1435125C7B5600336BAB /* StatusBar.xib in Resources */,
 				5ACA1475125C80AE00336BAB /* sync.png in Resources */,
 				5ACA1477125C80B600336BAB /* sync@2x.png in Resources */,
 				5ADBAA98125E0D5D00D081EF /* EditingView.xib in Resources */,
@@ -629,14 +625,6 @@
 				5A4126CA12537E800003065F /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		5ACA1433125C7B5600336BAB /* StatusBar.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5ACA1434125C7B5600336BAB /* en */,
-			);
-			name = StatusBar.xib;
 			sourceTree = "<group>";
 		};
 		5ADBAA96125E0D5D00D081EF /* EditingView.xib */ = {

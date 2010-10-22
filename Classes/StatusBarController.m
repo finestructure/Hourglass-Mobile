@@ -12,8 +12,9 @@
 
 @implementation StatusBarController
 
+@synthesize toolbarItems;
 @synthesize statusLabel;
-@synthesize syncButton;
+@synthesize saveButton;
 @synthesize progressView;
 
 
@@ -28,7 +29,7 @@
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Loading: %@ ... (0%%)", filename];
   [self.progressView startAnimating];
-  self.syncButton.hidden = YES;
+  self.saveButton.enabled = NO;
 }
 
 
@@ -36,7 +37,7 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
   [self.progressView stopAnimating];
-  self.syncButton.hidden = NO;
+  self.saveButton.enabled = YES;
 }
 
 
@@ -55,7 +56,7 @@
   filename = [filename lastPathComponent];
   self.statusLabel.text = [NSString stringWithFormat:@"Saving: %@ ... (0%%)", filename];
   [self.progressView startAnimating];
-  self.syncButton.hidden = YES;
+  self.saveButton.enabled = NO;
 }
 
 
@@ -63,7 +64,7 @@
   NSString *filename = [[NSUserDefaults standardUserDefaults] stringForKey:@"DropboxFileName"];
   self.statusLabel.text = [filename lastPathComponent];
   [self.progressView stopAnimating];
-  self.syncButton.hidden = NO;
+  self.saveButton.enabled = YES;
 }
 
 
@@ -78,19 +79,19 @@
 // button handler
 
 
-- (void)syncButtonTapped {
-  NSLog(@"Sync");
+- (void)save {
+  NSLog(@"saving...");
   [[DropboxController sharedInstance] saveFile];
 }
 
 
 #pragma mark -
-#pragma mark Application Lifecycle
+#pragma mark Init
 #pragma mark -
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+- (id)init {
+  if ((self = [super init])) {
     // notification handlers
     // load
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -112,44 +113,33 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(fileSaveProgress:)
                                                  name:kFileSaveProgress object:nil];  
+    
+    // set up toolbar    
+    self.saveButton = [[[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(save)] autorelease];
+    self.progressView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+    UIBarButtonItem *activityButton = [[[UIBarButtonItem alloc] initWithCustomView:self.progressView] autorelease];
+    
+    CGFloat barHeight = 40;
+    self.statusLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, barHeight)] autorelease];
+    //labelView.text = @"Dummy filename";
+    self.statusLabel.textAlignment = UITextAlignmentLeft;
+    self.statusLabel.backgroundColor = [UIColor clearColor];
+    self.statusLabel.textColor = [UIColor whiteColor];
+    self.statusLabel.font = [UIFont systemFontOfSize:14];
+    UIBarButtonItem *filenameLabel = [[[UIBarButtonItem alloc] initWithCustomView:self.statusLabel] autorelease];
+    
+    self.toolbarItems = [NSArray arrayWithObjects:
+                         self.saveButton,
+                         filenameLabel,
+                         activityButton, nil];
+    
   }
   return self;
 }
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  
-  UIGestureRecognizer *gr = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(syncButtonTapped)] autorelease];
-  [self.syncButton addGestureRecognizer:gr];
-}
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
 - (void)dealloc {
-    [super dealloc];
+  [super dealloc];
 }
 
 
