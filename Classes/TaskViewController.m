@@ -58,7 +58,7 @@ const int kRowHeight = 80;
   [super viewDidLoad];
 
   // Set up the buttons
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  //self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
   UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] 
     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)] autorelease];
