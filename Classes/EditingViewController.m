@@ -3,7 +3,7 @@
 
 @implementation EditingViewController
 
-@synthesize textField, editedObject, editedFieldKey, editedFieldName, editingDate, datePicker;
+@synthesize textField, editedObject, editedFieldKey, editedFieldName, datePicker;
 
 
 #pragma mark -
@@ -25,24 +25,27 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	
 	[super viewWillAppear:animated];
 	
-	// Configure the user interface according to state.
-    if (editingDate) {
-        textField.hidden = YES;
-        datePicker.hidden = NO;
-		NSDate *date = [editedObject valueForKey:editedFieldKey];
-        if (date == nil) date = [NSDate date];
-        datePicker.date = date;
-    }
-	else {
-        textField.hidden = NO;
-        datePicker.hidden = YES;
-        textField.text = [editedObject valueForKey:editedFieldKey];
-		textField.placeholder = self.title;
-        [textField becomeFirstResponder];
-    }
+  id value = [self.editedObject valueForKey:editedFieldKey];
+  NSEntityDescription *entitydesc = [self.editedObject entity];
+  NSAttributeDescription *attrdesc = [[entitydesc attributesByName] valueForKey:editedFieldKey];
+  
+	// Configure the user interface according to type
+  switch ([attrdesc attributeType]) {
+    case NSDateAttributeType:
+      textField.hidden = YES;
+      datePicker.hidden = NO;
+      datePicker.date = value;
+      break;
+    case NSStringAttributeType:
+      textField.hidden = NO;
+      datePicker.hidden = YES;
+      textField.text = value;
+      textField.placeholder = self.title;
+      [textField becomeFirstResponder];
+      break;
+  }
 }
 
 
@@ -52,11 +55,17 @@
 - (IBAction)save {
   NSLog(@"saving");
   
+  NSEntityDescription *entitydesc = [self.editedObject entity];
+  NSAttributeDescription *attrdesc = [[entitydesc attributesByName] valueForKey:editedFieldKey];
+
   // pass current value to the edited object, then pop.
-  if (editingDate) {
-    [editedObject setValue:datePicker.date forKey:editedFieldKey];
-  } else {
-    [editedObject setValue:textField.text forKey:editedFieldKey];
+  switch ([attrdesc attributeType]) {
+    case NSDateAttributeType:
+      [editedObject setValue:datePicker.date forKey:editedFieldKey];
+      break;
+    case NSStringAttributeType:
+      [editedObject setValue:textField.text forKey:editedFieldKey];
+      break;
   }
 	
   NSError *error;

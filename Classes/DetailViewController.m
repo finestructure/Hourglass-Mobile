@@ -84,22 +84,18 @@
     case 0: {
       controller.editedFieldKey = @"desc";
       controller.editedFieldName = NSLocalizedString(@"Description", @"display name for description");
-      controller.editingDate = NO;
     } break;
     case 1: {
       controller.editedFieldKey = @"startDate";
 			controller.editedFieldName = NSLocalizedString(@"Start", @"display name for start date");
-			controller.editingDate = YES;
     } break;
     case 2: {
       controller.editedFieldKey = @"endDate";
 			controller.editedFieldName = NSLocalizedString(@"End", @"display name for end date");
-			controller.editingDate = YES;
     } break;
     case 3: {
       controller.editedFieldKey = @"length";
       controller.editedFieldName = NSLocalizedString(@"Length", @"display name for length");
-      controller.editingDate = NO;
     } break;
   }
 	
