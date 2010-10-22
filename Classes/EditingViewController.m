@@ -14,7 +14,7 @@
 	self.title = editedFieldName;
 
 	// Configure the save and cancel buttons.
-	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
+	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
 	self.navigationItem.rightBarButtonItem = saveButton;
 	[saveButton release];
 	
