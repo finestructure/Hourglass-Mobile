@@ -101,6 +101,10 @@
       controller.editedFieldKey = @"length";
       controller.editedFieldName = NSLocalizedString(@"Length", @"display name for length");
     } break;
+    case 4: {
+      controller.editedFieldKey = @"project";
+      controller.editedFieldName = NSLocalizedString(@"Project", @"display name for project");
+    } break;
   }
 	
   [self.navigationController pushViewController:controller animated:YES];
