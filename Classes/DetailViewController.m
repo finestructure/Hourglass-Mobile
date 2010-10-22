@@ -40,7 +40,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 
@@ -70,6 +70,10 @@
     case 3:
 			cell.textLabel.text = @"length";
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2f h", [task.length floatValue]];
+			break;
+    case 4: 
+			cell.textLabel.text = @"project";
+			cell.detailTextLabel.text = [task.project name];
 			break;
   }
   return cell;
