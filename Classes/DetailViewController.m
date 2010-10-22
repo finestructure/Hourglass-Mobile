@@ -106,8 +106,7 @@
 - (NSDateFormatter *)dateFormatter {	
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		[dateFormatter setDateFormat:@"LLL dd – HH:mm"];
 	}
 	return dateFormatter;
 }
