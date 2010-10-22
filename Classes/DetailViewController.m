@@ -60,11 +60,11 @@
 			cell.detailTextLabel.text = task.desc;
 			break;
     case 1: 
-			cell.textLabel.text = @"start date";
+			cell.textLabel.text = @"start";
 			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.startDate];
 			break;
     case 2:
-			cell.textLabel.text = @"end date";
+			cell.textLabel.text = @"end";
 			cell.detailTextLabel.text = [self.dateFormatter stringFromDate:task.endDate];
 			break;
   }
@@ -84,12 +84,12 @@
     } break;
     case 1: {
       controller.editedFieldKey = @"startDate";
-			controller.editedFieldName = NSLocalizedString(@"Start Date", @"display name for start date");
+			controller.editedFieldName = NSLocalizedString(@"Start", @"display name for start date");
 			controller.editingDate = YES;
     } break;
     case 2: {
       controller.editedFieldKey = @"endDate";
-			controller.editedFieldName = NSLocalizedString(@"End Date", @"display name for end date");
+			controller.editedFieldName = NSLocalizedString(@"End", @"display name for end date");
 			controller.editingDate = YES;
     } break;
   }
@@ -106,8 +106,8 @@
 - (NSDateFormatter *)dateFormatter {	
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+		[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	}
 	return dateFormatter;
 }
