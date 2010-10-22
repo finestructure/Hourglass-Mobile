@@ -9,6 +9,7 @@
 @property (nonatomic, retain) NSString *editedFieldName;
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic, retain) IBOutlet UIDatePicker *timerPicker;
 
 - (IBAction)cancel;
 - (IBAction)save;

@@ -4,6 +4,7 @@
 @implementation EditingViewController
 
 @synthesize textField, editedObject, editedFieldKey, editedFieldName, datePicker;
+@synthesize timerPicker;
 
 
 #pragma mark -
@@ -26,24 +27,32 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
+
+  textField.hidden = YES;
+  datePicker.hidden = YES;
+  timerPicker.hidden = YES;
+
   id value = [self.editedObject valueForKey:editedFieldKey];
   NSEntityDescription *entitydesc = [self.editedObject entity];
   NSAttributeDescription *attrdesc = [[entitydesc attributesByName] valueForKey:editedFieldKey];
-  
+
 	// Configure the user interface according to type
   switch ([attrdesc attributeType]) {
     case NSDateAttributeType:
-      textField.hidden = YES;
       datePicker.hidden = NO;
       datePicker.date = value;
       break;
     case NSStringAttributeType:
       textField.hidden = NO;
-      datePicker.hidden = YES;
       textField.text = value;
       textField.placeholder = self.title;
       [textField becomeFirstResponder];
+      break;
+    case NSDecimalAttributeType:
+    case NSDoubleAttributeType:
+    case NSFloatAttributeType:
+      timerPicker.hidden = NO;
+      timerPicker.countDownDuration = [value floatValue]*3600;
       break;
   }
 }
@@ -53,8 +62,6 @@
 #pragma mark Save and cancel operations
 
 - (IBAction)save {
-  NSLog(@"saving");
-  
   NSEntityDescription *entitydesc = [self.editedObject entity];
   NSAttributeDescription *attrdesc = [[entitydesc attributesByName] valueForKey:editedFieldKey];
 
@@ -65,6 +72,11 @@
       break;
     case NSStringAttributeType:
       [editedObject setValue:textField.text forKey:editedFieldKey];
+      break;
+    case NSDecimalAttributeType:
+    case NSDoubleAttributeType:
+    case NSFloatAttributeType:
+      [editedObject setValue:[NSNumber numberWithFloat:timerPicker.countDownDuration/3600.] forKey:editedFieldKey];
       break;
   }
 	
