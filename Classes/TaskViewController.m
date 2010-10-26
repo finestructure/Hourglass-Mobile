@@ -14,7 +14,7 @@
 
 @implementation TaskViewController
 
-const int kRowHeight = 80;
+const int kRowHeight = 90;
 
 
 @synthesize managedObjectContext;
@@ -261,7 +261,7 @@ const int kRowHeight = 80;
 
 
 const CGFloat kRowWidth = 320;
-const CGFloat kTopOffset = 5;
+const CGFloat kTopOffset = 10;
 
 const CGFloat kRightOffset = 24;
 const CGFloat kLeftMainOffset = 10;
@@ -270,6 +270,7 @@ const CGFloat kLeftStartOffset = 100;
 
 const CGFloat kTopHeight = 15;
 const CGFloat kMiddleHeight = 40;
+const CGFloat kBottomHeight = 15;
 
 
 - (UITableViewCell *)tableViewCellWithReuseIdentifier:(NSString *)identifier {
@@ -327,14 +328,15 @@ const CGFloat kMiddleHeight = 40;
   // length
   {
     CGFloat x = kLeftMainOffset +2;
-    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight -5;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
     CGFloat width = kRowWidth - x - kLeftStartOffset;
-    CGFloat height = kRowHeight - y;
+    CGFloat height = kBottomHeight;
     CGRect rect = CGRectMake(x, y, width, height);
     UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
     label.tag = 4;
     label.font = [UIFont boldSystemFontOfSize:12];
     label.adjustsFontSizeToFitWidth = NO;
+    label.textColor = [UIColor blueColor];
     label.highlightedTextColor = [UIColor whiteColor];
     [cell.contentView addSubview:label];
   }
@@ -342,9 +344,9 @@ const CGFloat kMiddleHeight = 40;
   // start & end
   {
     CGFloat x = kLeftStartOffset;
-    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight -5;
+    CGFloat y = kTopOffset + kTopHeight + kMiddleHeight;
     CGFloat width = kRowWidth - x - kRightOffset;
-    CGFloat height = kRowHeight - y;
+    CGFloat height = kBottomHeight;
     CGRect rect = CGRectMake(x, y, width, height);
     UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
     label.tag = 5;
